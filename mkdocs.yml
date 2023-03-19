@@ -1,0 +1,132 @@
+# Project Information
+site_name: AI2615 Programming Guide
+site_description: Programming guide for AI2615, Algorithm Design and Analysis
+site_author: fstqwq
+site_url: ''
+strict: false
+
+# Repository
+repo_name: 'fstqwq/AI2615'
+repo_url: 'https://github.com/fstqwq/AI2615'
+
+# Copyright
+copyright: 'Copyright &copy; AI2615 SJTU'
+
+# Contents
+nav:
+  - 引言: 
+    - 欢迎: index.md
+    - 写在一切之前: disclaimer.md
+    - 鸣谢: acknowledgement.md
+  - 环境配置:
+    - Linux: env/linux.md
+    - Windows: env/windows.md
+    - Mac: env/mac.md
+  - C++ 速成:
+    - 输入输出与基本数据类型: cpp/io.md
+    - 数组申请: cpp/array.md
+    - STL 与现代 C++ 语法: cpp/stl.md
+  - 调试:
+    - 运行时错误: debug/runtime.md
+    - 编译错误: debug/compilation.md
+    - OJ 返回提交不正确:
+      - 针对代码查错: debug/oj.md
+      - 构造数据与对拍: debug/make_data.md
+  - 分治:
+    - 最近点对: divide_and_conqure/closest.md
+    - 快速选择: divide_and_conqure/kth.md
+    - 前三题的 Debug 提示: divide_and_conqure/hint.md
+  - 图论:
+    - 图的存储: graph/data_structure.md
+  - 参考阅读: ref/resources.md 
+# Theme
+theme:
+  name: material
+  static_templates:
+    - 404.html
+  language: 'zh'
+  palette:
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: white
+      accent: red
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue
+      accent: blue
+      toggle:
+        icon: material/weather-night
+        name: Switch to light mode
+  include_search_page: false
+  search_index_only: true
+  favicon: 'favicon.ico'
+  icon:
+    logo: 'material/text-box-check'
+  features:
+    - navigation.tabs
+    - navigation.instant
+    - navigation.expand
+  font:
+    text: 'Fira Sans'
+    code: 'Fira Mono'
+
+plugins: []
+
+# Customization
+extra:
+  disqus: 'AI2615'
+  copyright: '<a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh">CC BY-SA 4.0</a> 和 <a href="https://github.com/zTrix/sata-license">SATA</a>'
+  pagetime: 'on'
+  manifest: 'manifest.webmanifest'
+
+extra_javascript:
+  - '_static/js/math-csr.js?math-csr'
+  - '_static/js/tex-mml-chtml.js?math-csr'
+
+extra_css:
+  - '_static/css/extra.css'
+  - '_static/css/mathjax.css'
+
+# Extensions
+markdown_extensions:
+  - admonition
+  - def_list
+  - footnotes
+  - meta
+  - toc:
+      permalink: ""
+      slugify: !!python/name:pymdownx.slugs.uslugify
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.caret
+  - pymdownx.critic
+  - attr_list
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - pymdownx.highlight:
+      linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.magiclink
+  - pymdownx.mark
+  - pymdownx.snippets
+  - pymdownx.progressbar
+  - pymdownx.smartsymbols
+  - pymdownx.superfences:
+      custom_fences:
+        - name: math
+          class: arithmatex
+          format: !!python/name:pymdownx.arithmatex.fence_mathjax_format
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+  - pymdownx.tabbed:
+      alternate_style: true
