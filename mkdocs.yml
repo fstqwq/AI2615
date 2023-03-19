@@ -65,7 +65,7 @@ theme:
         name: Switch to light mode
   include_search_page: false
   search_index_only: true
-  favicon: 'favicon.ico'
+  favicon: '_static/favicon.ico'
   icon:
     logo: 'material/text-box-check'
   features:
