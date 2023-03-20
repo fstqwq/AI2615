@@ -238,7 +238,7 @@ Objects involved in the operation:
 ```
 如果你使用的是 libc++ 的编译器，可以使用 `#define _LIBCPP_ENABLE_ASSERTIONS 1` 来达到类似效果。详见[提供该项内容的同学在水源的介绍](https://shuiyuan.sjtu.edu.cn/t/topic/127129/106)。
 
-### 关于栈溢出
+### 开栈
 
 在 Linux 下，默认运行环境下栈是只有若干 MB 的，这在比如 dfs 深度大时会导致栈溢出。大多数 OJ 采用了无限栈，在 Linux 下要做到这一点，你可以使用以下命令（可能需要 `sudo`）
 ```bash

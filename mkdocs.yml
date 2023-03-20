@@ -47,6 +47,7 @@ nav:
     - 我实在写不完作业了，救救: divide_and_conqure/cheat.md
   - 图论:
     - 图的存储: graph/data_structure.md
+    - 图上搜索: graph/search.md
   - 参考阅读: ref/resources.md 
 # Theme
 theme:
