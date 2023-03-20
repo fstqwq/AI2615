@@ -16,38 +16,38 @@ int main() {
 ```
 #### 关于前两行
 前两句表示的是使用（几乎）所有 C++ 头文件和命名空间 std。这两句话不符合很多工程规范，对此笔者做出一定的解释。你可以根据自己的喜好来做出自己的选择。
-##### 关于 `bits/stdc++.h`
-使用这个 `libstdc++` 提供的“万能头文件”，你可以调用大量 STL 而不需要思考头文件的配置，减轻负担。
+??? info "关于 bits/stdc++.h"
+    使用这个 `libstdc++` 提供的“万能头文件”，你可以调用大量 STL 而不需要思考头文件的配置，减轻负担。
 
-例如，如果不使用该头文件，你可能需要考虑自己写下面的内容：
-```cpp
-#include <iostream>
-#include <iomanip>
-#include <cstdio>
-#include <cstdlib>
-#include <ctime>
-#include <algorithm>
-#include <random>
-#include <vector>
-#include <queue>
-#include <map>
-#include <set>
-```
-当然，`bits/stdc++.h` 有不少缺点：
+    例如，如果不使用该头文件，你可能需要考虑自己写下面的内容：
+    ```cpp
+    #include <iostream>
+    #include <iomanip>
+    #include <cstdio>
+    #include <cstdlib>
+    #include <ctime>
+    #include <algorithm>
+    #include <random>
+    #include <vector>
+    #include <queue>
+    #include <map>
+    #include <set>
+    ```
+    当然，`bits/stdc++.h` 有不少缺点：
 
-* 只有 GCC 和使用 `libstdc++` 的 clang 能够使用，MSVC 不支持。
-* 会导致编译速度降低。
-* 联合 `using namespace std` 使用会导致导致某些变量名不可用，如 `map`, `y1`。
+    * 只有 GCC 和使用 `libstdc++` 的 clang 能够使用，MSVC 不支持。
+    * 会导致编译速度降低。
+    * 联合 `using namespace std` 使用会导致导致某些变量名不可用，如 `map`, `y1`。
 
-但是，习惯的话这个「万能头文件」能带来许多便利。
+    但是，习惯的话这个「万能头文件」能带来许多便利。
 
-##### 关于 `using namespace std`
-网上有大量关于这句话的讨论，比如 [Why “using namespace std” is considered bad practice](https://www.geeksforgeeks.org/using-namespace-std-considered-bad-practice/)。
+??? info "关于 using namespace std"
+    网上有大量关于这句话的讨论，比如 [Why “using namespace std” is considered bad practice](https://www.geeksforgeeks.org/using-namespace-std-considered-bad-practice/)。
 
-使用这句话的原因主要还是两点：
+    使用这句话的原因主要还是两点：
 
-* 在不被其他文件引用的 cpp 文件中使用这句话并不会造成很多污染。
-* 实在是太方便了。
+    * 在不被其他文件引用的 cpp 文件中使用这句话并不会造成很多污染。
+    * 实在是太方便了。
 
 #### cin/cout 运行缓慢的问题
 
@@ -56,17 +56,21 @@ int main() {
 1. `cin` / `cout` 与 stdio 同步导致其失去缓冲。
 2. `endl` 会调用 `cout.flush()`，而这个操作非常耗时。
 
-更多信息你可以在[这里](https://en.cppreference.com/w/cpp/io/manip/endl)获取到。我们通常会保证不需要解决这个问题就能通过对应题目；如果你认为你的程序主要被这个原因拖慢了，你可以用两种方法来解决这个问题：
+更多信息你可以在[这里](https://en.cppreference.com/w/cpp/io/manip/endl)获取到。我们尽量保证不需要解决这个问题就能通过对应题目。
 
-* 使用 C 的输入输出方式： `scanf`/`printf`。
-* 减少 `endl` 次数并禁用同步
-    * 在输出行数较多时，使用 `'\n'` 而非 `endl`。
-    * 在输入前添加
-    ```cpp
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-    ```
-    来禁用同步。请注意，这种情况下你应当只使用 cin/(scanf, getchar) 中的一种，cout/(printf, puts, putchar) 中的一种。这是因为此时 `cin`/`cout` 会将内容输入输出到 buffer 里，导致与 stdio 失去同步。
+??? info "如果你认为你的程序主要被这个原因拖慢了，并想解决"
+
+    你可以用两种方法来解决这个问题：
+
+    * 使用 C 的输入输出方式： `scanf`/`printf`。
+    * 减少 `endl` 次数并禁用同步
+        * 在输出行数较多时，使用 `'\n'` 而非 `endl`。
+        * 在输入前添加
+        ```cpp
+        ios::sync_with_stdio(false);
+        cin.tie(nullptr);
+        ```
+        来禁用同步。请注意，这种情况下你应当只使用 cin/(scanf, getchar) 中的一种，cout/(printf, puts, putchar) 中的一种。这是因为此时 `cin`/`cout` 会将内容输入输出到 buffer 里，导致与 stdio 失去同步。
     
 
 

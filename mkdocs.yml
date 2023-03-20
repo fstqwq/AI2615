@@ -19,9 +19,17 @@ nav:
     - 写在一切之前: disclaimer.md
     - 鸣谢: acknowledgement.md
   - 环境配置:
-    - Linux: env/linux.md
-    - Windows: env/windows.md
-    - Mac: env/mac.md
+    - 总览: env/overview.md
+    - 使用命令行编译运行: env/commandline.md
+    - 编辑器 / IDE 配置:
+      - VSCode: env/editor/vscode.md
+      - DevCPP / Code::Blocks: env/editor/devcpp.md
+      - CLion: env/editor/clion.md
+      - Vim: env/editor/vim.md
+    - 编译器配置:
+      - Linux: env/compiler/linux.md
+      - Windows: env/compiler/windows.md
+      - Mac: env/compiler/mac.md
   - C++ 速成:
     - 输入输出与基本数据类型: cpp/io.md
     - 数组申请: cpp/array.md

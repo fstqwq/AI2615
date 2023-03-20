@@ -4,7 +4,7 @@
 
 当然，C++ 和 Python 在很多地方仍然是本质不一样的，在 [最近点对](/divide_and_conqure/closest.md) 的翻译代码例子中我们可以体会到一部分，但这并不影响我们写出更「偷懒」而简短的代码。
 
-读完本章内容后，你可以在 [1786. Ctrl + R](https://acm.sjtu.edu.cn/OnlineJudge/problem/1786) 一题里测试常用的 `string`, `vector`, `map` 的用法。这是一道关于字符串处理的题。不使用 STL 的话，C 语言相关的字符串处理及其相关的数据结构都较为繁琐；然而，使用 STL 可以在几行代码内轻松搞定。以下是一份参考实现：
+熟悉这些内容后，你可以在 [1786. Ctrl + R](https://acm.sjtu.edu.cn/OnlineJudge/problem/1786) 一题里测试常用的 `string`, `vector`, `map` 的用法。这是一道关于字符串处理的题。不使用 STL 的话，C 语言相关的字符串处理及其相关的数据结构都较为繁琐；然而，使用 STL 可以在几行代码内轻松搞定。以下是一份参考实现：
 
 ```cpp
 int main() {
@@ -255,3 +255,6 @@ int main() {
     }); 
 }
 ```
+
+!!! TODO
+    整理一下结构，避免全是列表。
