@@ -44,6 +44,7 @@ nav:
     - 最近点对: divide_and_conqure/closest.md
     - 快速选择: divide_and_conqure/kth.md
     - 前三题的 Debug 提示: divide_and_conqure/hint.md
+    - 我实在写不完作业了，救救: divide_and_conqure/cheat.md
   - 图论:
     - 图的存储: graph/data_structure.md
   - 参考阅读: ref/resources.md 

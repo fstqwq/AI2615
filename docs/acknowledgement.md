@@ -29,4 +29,6 @@
 * whhhhhhh
 * Little Gyro
 
-本项目在迁移到 Pages 时大量使用了 [OI Wiki](https://oi-wiki.org/) 诸多代码实现，并采用了相同的版权声明，在此致谢。
+本项目在迁移到 Pages 时使用了 [OI Wiki](https://oi-wiki.org/) 诸多代码实现，并采用了相同的版权声明，在此致谢。
+
+本项目 favicon 使用了 [这不是小恐龙](https://zhuanlan.zhihu.com/p/91799226) 中的用食表情，非常 ~~好吃~~ 可爱。
