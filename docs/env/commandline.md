@@ -17,13 +17,16 @@ int main() {
 }
 ```
 你可以使用以下命令，来编译名为 `a.cpp` 的程序到二进制程序 `a`，并运行：
-```bash
-g++ a.cpp -o a -g -Wall -std=c++17
-./a
-```
-
-!!! info "对于 Windows 用户"
-    Windows 使用 `\` 而不是 `/`，请使用 `.\a.exe` 或者直接 `a.exe` 运行。
+=== "Linux / macOS"
+    ```bash
+    g++ a.cpp -o a -g -Wall -std=c++17
+    ./a
+    ```
+=== "Windows"
+    ```cmd
+    g++ a.cpp -o a -g -Wall -std=c++17
+    .\a.exe
+    ```
 
 
 笔者解释一下这里的编译命令：
@@ -57,13 +60,21 @@ g++ a.cpp -o a -g -Wall -std=c++17
 
 ### 文件输入输出
 有时，我们会希望从一个文件里面读取输入文件，并输出到文件中。在不改动代码文件的情况下，你可以这么做：
-```
-./a < input.txt > output.txt
-```
-!!! info "对于 Windows 用户"
-    PowerShell 的管道输入输出语法不一样，因此没法在 PowerShell 里运行 `a.exe < input.txt > output.txt`。
 
-    笔者不擅长 PowerShell，因此推荐使用 `cmd`，可以直接使用上面的命令。你可以在打开的 PowerShell 窗口里输入 cmd 来让 PowerShell 成为 cmd 的套皮。
+=== "Linux / macOS"
+    ```bash
+    ./a < input.txt > output.txt
+    ```
+=== "Windows"
+    ```cmd
+    .\a.exe < input.txt > output.txt
+    ```
+    
+    !!! info "对于使用 PowerShell 的 Windows 用户"
+        PowerShell 的管道输入输出语法不一样，因此没法在 PowerShell 里运行以上命令。
+
+        要直接使用上面的命令，你可以在打开的 PowerShell 窗口里输入 cmd 来让 PowerShell 成为 cmd 的套皮。
+
 
 
 

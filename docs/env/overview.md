@@ -5,10 +5,12 @@
 
 如果你没有一个可以进行 C++ 编程的环境，这一章将也会介绍一些常用的 C++ 编程环境。以下是我们推荐的环境：
 
-* Windows:
+=== "Windows"
     * 编辑器: [VSCode](./editor/vscode.md)，编译器: [GCC-MinGW 或者使用 WSL](./compiler/windows.md)
     * IDE: [Dev-C++ / Code::Blocks](./editor/devcpp.md)
     * IDE: [CLion](./editor/clion.md)
-* Linux, Mac:
-    * 编辑器: [VSCode](./editor/vscode.md) / [Vim](./editor/vim.md) / gedit (Linux) / XCode (Mac)，编译器: [GCC](./compiler/linux.md)
+
+=== "Linux / macOS"
+    * 编辑器: [VSCode](./editor/vscode.md) / [Vim](./editor/vim.md) / gedit (Linux)，编译器: [GCC](./compiler/linux.md)
+    * IDE：XCode (macOS)
     * IDE: [CLion](./editor/clion.md)

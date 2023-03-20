@@ -101,4 +101,5 @@ fstqwq@DESKTOP-fstqwq:/mnt/c/code$
 ```
 立刻就找出问题了。
 
-* 当然，请注意 Wrong Answer 也有可能是参考程序写挂了。
+!!! bug "答案错误还是参考答案错误？"
+    请注意 Wrong Answer 也有可能是参考程序写挂了。

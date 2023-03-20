@@ -29,7 +29,7 @@ nav:
     - 编译器配置:
       - Linux: env/compiler/linux.md
       - Windows: env/compiler/windows.md
-      - Mac: env/compiler/mac.md
+      - macOS: env/compiler/mac.md
   - C++ 速成:
     - 输入输出与基本数据类型: cpp/io.md
     - 数组申请: cpp/array.md
@@ -48,6 +48,7 @@ nav:
   - 图论:
     - 图的存储: graph/data_structure.md
     - 图上搜索: graph/search.md
+    - 2-SAT: graph/2sat.md
   - 参考阅读: ref/resources.md 
 # Theme
 theme:
