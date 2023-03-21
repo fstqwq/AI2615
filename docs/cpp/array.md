@@ -1,4 +1,4 @@
-由于你写的单文件代码是为了处理一件事，并且处理完就退出，那么一些工程上的规范实际上是不需要遵守的。[^2] 这里我们讲一些在算法题里常见的用法。
+由于你写的单文件代码是为了处理一件事，并且处理完就退出，那么一些工程上的规范实际上是不需要遵守的。[^2] 这里我们讲一些在算法题里常见的实践。
 
 [^2]:如果你读过“虎书”《现代编译原理：C语言描述》，你可以发现在这种目的下，作者甚至推荐写一个玩具编译器也可以只申请内存而不释放。
 
@@ -27,7 +27,8 @@ int main() {
 }
 ```
 
-!!! info "MSVC 不支持该语法，具体请见[参考资料](https://stackoverflow.com/questions/5246900/enabling-vlas-variable-length-arrays-in-ms-visual-c)。"
+!!! info "MSVC 不支持该语法"
+    具体请见[参考资料](https://stackoverflow.com/questions/5246900/enabling-vlas-variable-length-arrays-in-ms-visual-c)。
 
 ### 使用 STL
 

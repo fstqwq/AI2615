@@ -20,16 +20,13 @@ nav:
     - 鸣谢: acknowledgement.md
   - 环境配置:
     - 总览: env/overview.md
-    - 使用命令行编译运行: env/commandline.md
     - 编辑器 / IDE 配置:
       - VSCode: env/editor/vscode.md
       - DevCPP / Code::Blocks: env/editor/devcpp.md
       - CLion: env/editor/clion.md
       - Vim: env/editor/vim.md
-    - 编译器配置:
-      - Linux: env/compiler/linux.md
-      - Windows: env/compiler/windows.md
-      - macOS: env/compiler/mac.md
+    - 编译器配置: env/compiler.md
+    - 使用命令行编译运行: env/commandline.md
   - C++ 速成:
     - 输入输出与基本数据类型: cpp/io.md
     - 数组申请: cpp/array.md
@@ -83,6 +80,7 @@ theme:
     - navigation.tabs
     - navigation.instant
     - navigation.expand
+    - content.tabs.link
   font:
     text: 'Fira Sans'
     code: 'Fira Mono'

@@ -37,17 +37,20 @@ int main() {
 
     * 只有 GCC 和使用 `libstdc++` 的 clang 能够使用，MSVC 不支持。
     * 会导致编译速度降低。
-    * 联合 `using namespace std` 使用会导致导致某些变量名不可用，如 `map`, `y1`。
 
-    但是，习惯的话这个「万能头文件」能带来许多便利。
+    在上面两点并不致命的时候，这个「万能头文件」能带来许多便利。
 
 ??? info "关于 using namespace std"
-    网上有大量关于这句话的讨论，比如 [Why “using namespace std” is considered bad practice](https://www.geeksforgeeks.org/using-namespace-std-considered-bad-practice/)。
+    网上有大量关于这句话的讨论，比如 [Why “using namespace std” is considered bad practice](https://www.geeksforgeeks.org/using-namespace-std-considered-bad-practice/)。常见的缺点是：
 
-    使用这句话的原因主要还是两点：
+    * 会导致导致某些变量名不可用，如 `map`, `y1`。
+    * 在库函数与自己的函数命名冲突时，可能会导致令人困惑的编译错误和运行错误。
 
-    * 在不被其他文件引用的 cpp 文件中使用这句话并不会造成很多污染。
-    * 实在是太方便了。
+    使用这句话的原因主要是方便偷懒。在上下文无歧义时，更短的代码更方便编写和阅读。
+    
+    当然，还存在偷一半懒的方案。这样的做法在工程里也是规范的。
+
+    * 只 `using` 自己用到的内容，如 `using std::cin, std::cout, std::ios, std::vector;`
 
 #### cin/cout 运行缓慢的问题
 
