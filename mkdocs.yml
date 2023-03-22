@@ -45,6 +45,7 @@ nav:
   - 图论:
     - 图的存储: graph/data_structure.md
     - 图上搜索: graph/search.md
+    - 最短路: graph/sssp.md
     - 2-SAT: graph/2sat.md
   - 参考阅读: ref/resources.md 
 # Theme
@@ -82,8 +83,9 @@ theme:
     - navigation.expand
     - content.tabs.link
   font:
-    text: 'Fira Sans'
-    code: 'Fira Mono'
+    false
+#    text: 'Fira Sans'
+#    code: 'Fira Mono'
 
 plugins: []
 
@@ -100,6 +102,7 @@ extra_javascript:
 
 extra_css:
   - '_static/css/extra.css'
+  - '_static/css/fonts.css'
   - '_static/css/mathjax.css'
 
 # Extensions
