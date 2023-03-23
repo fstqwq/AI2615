@@ -30,7 +30,7 @@
 
 因此，我们在这里介绍使用 `priority_queue` 来实现 $O(m \log n)$ Dijkstra。`priority_queue` 默认提供了一个基于小于号比较的**大**根堆，这意味着我们需要对操作进行一点修改来让其每次返回最小距离。
 
-* 修改 `priority_queue` 的比较函数: `priority_queue < node, vector<node>, greater<node> >`
+* 修改 `priority_queue` 的比较函数: `priority_queue < pair<LL, int>, vector<pair<LL, int>>, greater<pair<LL, int>> >`
 * 修改信息结点的小于号:
     ```cpp
     struct node {

@@ -47,7 +47,9 @@ nav:
     - 图上搜索: graph/search.md
     - 最短路: graph/sssp.md
     - 2-SAT: graph/2sat.md
-  - 参考阅读: ref/resources.md 
+  - 参考阅读:
+    - 参考资料: ref/resources.md 
+    - "unordered_map: 记一次有趣的 debug": ref/debug_unordered_map.md
 # Theme
 theme:
   name: material
@@ -82,6 +84,7 @@ theme:
     - navigation.instant
     - navigation.expand
     - content.tabs.link
+    - content.code.copy
   font:
     false
 #    text: 'Fira Sans'
