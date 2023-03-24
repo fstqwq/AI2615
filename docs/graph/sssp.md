@@ -19,10 +19,10 @@
     
     实践中即使需要 $o(\log n)$ 的 decrease-key，通常会采用结构简单、运行效率高的配对堆。
 
-与此同时，任何一个支持 push 和 pop min 的堆都可以实现 $O(m \log m)$ 的 Dijkstra。
+与此同时，任何一个支持 push 和 pop-min 的堆都可以实现 $O(m \log m)$ 的 Dijkstra。
 
 * decrease-key: 直接 push 一个新的结点进去。
-* pop min: 如果其记录的距离信息不是最新的，那么跳过这个结点。
+* pop-min: 如果 pop 出的距离信息不是最新的，那么跳过。
 
 ??? question "为什么是 $O(m \log m)$？"
     Hint: 对每条边进行考虑。
