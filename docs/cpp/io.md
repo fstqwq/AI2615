@@ -1,5 +1,16 @@
 对于部分同学来说，C++ 已经是非常久远的回忆，因此我们（针对做算法题）进行适当重温，以 OJ 题目为例讲解相关内容。
 
+??? question "为什么要使用 C++，而不是 Python？"
+
+    我们主要基于以下几点原因：
+
+    - 在自动评测的机制下，
+        - Python 无法区分出「复杂度正确而缓慢的实现」与「复杂度错误而高效的实现」。比如，在 Python 里手写的 $O(n)$ Median of Medians 是一定跑不过 $O(n \log n)$ 的用 C 实现的 `list.sort` 的。
+        - Python 输入输出麻烦，而且非常容易触发异常。
+    - 真正要熟练使用 Python，门槛并不比重新捡起 C++ 低。
+        - Python 容易上手只是因为大多数情况下使用别人提供的库即可，不需要自己动手。
+        - 在不熟练的情况下，debug Python 可能会非常麻烦。
+
 [1294. A+B Problem](https://acm.sjtu.edu.cn/OnlineJudge/problem?problem_id=1294) 一个可能的实现是这样的：
 ```cpp
 #include <bits/stdc++.h>

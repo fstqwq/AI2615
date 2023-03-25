@@ -74,7 +74,8 @@ int main() {
     map <int, int> dict;
     dict[1] = 1;
     dict[123456789] = 2;
-    cout << dict[1] << " " << dict[2] << " " << dict[123456789] << endl; // 1 0 2
+    cout << dict[1] << " " << dict[2] << " " << dict[123456789] << endl;
+    // outputs: 1 0 2
     map <string, int> strdict;
     strdict["hello"] = 1;
 }
@@ -94,9 +95,11 @@ int main() {
 int main() {
     set <int> s;
     s.insert (1); s.insert (1);
-    cout << s.size() << " " << s.count(0) << " " << s.count(1) << endl; // 1 0 1
+    cout << s.size() << " " << s.count(0) << " " << s.count(1) << endl;
+    // outputs: 1 0 1
     s.erase(1);
-    cout << s.size() << " " << s.count(0) << " " << s.count(1) << endl; // 0 0 0
+    cout << s.size() << " " << s.count(0) << " " << s.count(1) << endl;
+    // outputs: 0 0 0
 }
 ```
 
@@ -162,6 +165,8 @@ int my_rand(int l, int r) { // [l, r]
 ### 现代 C++ 语法
 
 许多现代 C++ 语法像是「魔法」一样，与其他特性一样构成了晦涩难懂的 C++ 标准。不过，我们可以使用其中比较方便的一些来为我们所用。
+
+以下内容均需要 C++11 以上，部分需要 C++14/17。你可能需要添加 `-std=c++17` 编译选项。
 
 #### [auto](https://zh.cppreference.com/w/cpp/language/auto)
 
@@ -255,6 +260,3 @@ int main() {
     }); 
 }
 ```
-
-!!! TODO
-    整理一下结构，避免全是列表。

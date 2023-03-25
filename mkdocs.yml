@@ -34,9 +34,8 @@ nav:
   - 调试:
     - 运行时错误: debug/runtime.md
     - 编译错误: debug/compilation.md
-    - OJ 返回提交不正确:
-      - 针对代码查错: debug/oj.md
-      - 构造数据与对拍: debug/make_data.md
+    - OJ 返回提交不正确: debug/oj.md
+    - 构造数据与对拍: debug/make_data.md
   - 分治:
     - 最近点对: divide_and_conqure/closest.md
     - 快速选择: divide_and_conqure/kth.md
