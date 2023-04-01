@@ -1,4 +1,4 @@
-调试运行时错误总是令人苦恼的。这里我们主要介绍几种不依赖于 IDE 的调试方法，以期起到一定普适的介绍。
+调试程序错误总是令人苦恼的。这里我们主要介绍几种不依赖于 IDE 的调试方法，以期起到一定普适的介绍。
 
 我们将以这份代码为例，尝试找到其中出现的问题。
 ```cpp
@@ -16,9 +16,11 @@ int main() {
 ```
 以上代码将会递归调用 `test` 函数 $10^6$ 次，但是从第 10 次开始访问 `a` 数组就越界了。
 
-### 输出调试
+### 输出调试与断言
 
-输出调试有时也叫打桩测试。如果你和我一样更喜欢通过查看输出信息看判断错误，那么我更推荐输出调试。尽管类似的功能可以通过调试器设置断点并输出的方法完成，但是实践上来说输出调试更有效率，更方便离线地（对于一段静态内容进行分析）而不是在线地（和程序进行大量交互）查错。
+你可以增加输出与断言并重新运行的方法来尝试找到程序错误，有时这种方法也叫打桩测试。
+
+尽管类似的功能可以通过调试器设置断点并输出的方法完成，但是这种方法在编译足够快时效率更高，更方便离线地（对于一段静态内容进行分析）而不是在线地（和程序进行大量交互）查错。
 
 对于上述代码，我们可以在可能出错的代码前后插入输出语句，来看对应运行中途过程是否是想要的。以上面代码为例：
 ```cpp
@@ -37,9 +39,31 @@ int main() {
 ```
 此时，你的程序会在若干行 `test` 后被杀死，你可以直接针对输出 $x$ 的信息寻找问题。
 
+你也可以对一些条件进行断言，来判断程序是否按照预期进行。例如，我们可以在 `test` 函数中加入断言，来判断 `x` 是否会超过数组的范围：
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+int a[10];
+void test (int x) {
+    assert (x <= 10);
+    if (x > 1e6) return;
+    a[x] = x;
+    test (x + 1);
+}
+int main() {
+    test (1);
+}
+```
+此时，你的程序会在断言失败时输出以下内容：
+```bash
+Assertion failed: x <= 10, file a.cpp, line 5
+```
+断言对于寻找一些简单的错误非常有用，同时由于其会在 OJ 上面显示 Runtime Error，因此也可以通过增删测试来从 OJ 结果里获得更多信息。
+
+
 ### GDB 调试
 
-除了 IDE 提供的调试工具，你还可以使用 `gdb` 进行调试，调试器在运行时错误方面（特别是递归）拥有优势。如果需要 `gdb` 输出信息，你可能需要打开 `-g` 编译开关。
+调试器在运行时错误方面（特别是递归）拥有优势。除了 IDE 提供了可视化调试工具，你还可以使用 `gdb` 进行命令行调试。如果需要 `gdb` 输出信息，你可能需要打开 `-g` 编译开关。
 
 ```cpp
 #include <bits/stdc++.h>
@@ -56,12 +80,12 @@ int main() {
 ```
 以上代码将会递归调用 `test` 函数 $10^6$ 次，但是从第 10 次开始访问 `a` 数组就越界了。一个参考的调试过程如下：
 ```bash
-fstqwq@DESKTOP-fstqwq:/mnt/c/code$ g++ a.cpp -o a -g
-fstqwq@DESKTOP-fstqwq:/mnt/c/code$ gdb a
+~$ g++ a.cpp -o a -g
+~$ gdb a
 ...
 Reading symbols from a...done.
 (gdb) r
-Starting program: /mnt/c/code/a
+Starting program: ~/a
 
 Program received signal SIGSEGV, Segmentation fault.
 0x000000000800076b in test (x=1008) at a.cpp:6
@@ -106,7 +130,7 @@ A debugging session is active.
         Inferior 1 [process 15145] will be killed.
 
 Quit anyway? (y or n) y
-fstqwq@DESKTOP-fstqwq:/mnt/c/code$
+~$
 ```
 
 常用的指令有以下几个：
@@ -134,7 +158,7 @@ g++ a.cpp -o a -g -fsanitize=address -fsanitize=undefined
 ```
 运行，可以得到类似以下的 log：
 ```bash
-fstqwq@DESKTOP-fstqwq:/mnt/c/code$ ./a
+~$ ./a
 test 1
 test 2
 test 3
@@ -153,22 +177,22 @@ a.cpp:7:7: runtime error: store to address 0x7f0e0b006cc8 with insufficient spac
 =================================================================
 ==15175==ERROR: AddressSanitizer: global-buffer-overflow on address 0x7f0e0b006cc8 at pc 0x7f0e0ae02e75 bp 0x7fffd0fd7800 sp 0x7fffd0fd77f0
 WRITE of size 4 at 0x7f0e0b006cc8 thread T0
-    #0 0x7f0e0ae02e74 in test(int) /mnt/c/code/a.cpp:7
-    #1 0x7f0e0ae02eb8 in test(int) /mnt/c/code/a.cpp:8
-    #2 0x7f0e0ae02eb8 in test(int) /mnt/c/code/a.cpp:8
-    #3 0x7f0e0ae02eb8 in test(int) /mnt/c/code/a.cpp:8
-    #4 0x7f0e0ae02eb8 in test(int) /mnt/c/code/a.cpp:8
-    #5 0x7f0e0ae02eb8 in test(int) /mnt/c/code/a.cpp:8
-    #6 0x7f0e0ae02eb8 in test(int) /mnt/c/code/a.cpp:8
-    #7 0x7f0e0ae02eb8 in test(int) /mnt/c/code/a.cpp:8
-    #8 0x7f0e0ae02eb8 in test(int) /mnt/c/code/a.cpp:8
-    #9 0x7f0e0ae02eb8 in test(int) /mnt/c/code/a.cpp:8
-    #10 0x7f0e0ae02ed0 in main /mnt/c/code/a.cpp:11
+    #0 0x7f0e0ae02e74 in test(int) ~/a.cpp:7
+    #1 0x7f0e0ae02eb8 in test(int) ~/a.cpp:8
+    #2 0x7f0e0ae02eb8 in test(int) ~/a.cpp:8
+    #3 0x7f0e0ae02eb8 in test(int) ~/a.cpp:8
+    #4 0x7f0e0ae02eb8 in test(int) ~/a.cpp:8
+    #5 0x7f0e0ae02eb8 in test(int) ~/a.cpp:8
+    #6 0x7f0e0ae02eb8 in test(int) ~/a.cpp:8
+    #7 0x7f0e0ae02eb8 in test(int) ~/a.cpp:8
+    #8 0x7f0e0ae02eb8 in test(int) ~/a.cpp:8
+    #9 0x7f0e0ae02eb8 in test(int) ~/a.cpp:8
+    #10 0x7f0e0ae02ed0 in main ~/a.cpp:11
     #11 0x7f0e085a1c86 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21c86)
-    #12 0x7f0e0ae02a99 in _start (/mnt/c/code/a+0x2a99)
+    #12 0x7f0e0ae02a99 in _start (~/a+0x2a99)
 
 0x7f0e0b006cc8 is located 0 bytes to the right of global variable 'a' defined in 'a.cpp:3:5' (0x7f0e0b006ca0) of size 40
-SUMMARY: AddressSanitizer: global-buffer-overflow /mnt/c/code/a.cpp:7 in test(int)
+SUMMARY: AddressSanitizer: global-buffer-overflow ~/a.cpp:7 in test(int)
 Shadow bytes around the buggy address:
   0x0fe2415f8d40: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
   0x0fe2415f8d50: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
@@ -221,7 +245,7 @@ for (int i = 1; i <= n; i++) {
 大多数时候，写入越界一个 int 的 `a[n]` 并不会报错。但是，如果使用 debug 容器，会收到以下运行时报错：
     
 ```
-...\debug\vector:442:
+.../debug/vector:442:
 In function:
     std::debug::vector<_Tp, _Allocator>::reference std::debug::vector<_Tp,
     _Allocator>::operator[](size_type) [with _Tp = int; _Allocator =
@@ -238,7 +262,9 @@ Objects involved in the operation:
 ```
 如果你使用的是 libc++ 的编译器，可以使用 `#define _LIBCPP_ENABLE_ASSERTIONS 1` 来达到类似效果。详见[提供该项内容的同学在水源的介绍](https://shuiyuan.sjtu.edu.cn/t/topic/127129/106)。
 
-### 开栈
+### 爆栈与开栈
+
+尽管在 OJ 上配置了无限栈，但是在本地调试时，你可能会遇到爆栈的问题。
 
 在 Linux 下，默认运行环境下栈是只有若干 MB 的，这在比如 dfs 深度大时会导致栈溢出。大多数 OJ 采用了无限栈，在 Linux 下要做到这一点，你可以使用以下命令（可能需要 `sudo`）
 ```bash
