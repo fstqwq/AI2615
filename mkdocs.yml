@@ -51,6 +51,7 @@ nav:
     - 最小生成树: greedy/mst.md
   - 动态规划:
     - 递推与递归: dp/iteration_equals_recursion.md
+    - 最长下降子序列: dp/lis.md
     - 旅行商问题: dp/tsp.md
   - 参考阅读:
     - 参考资料: ref/resources.md 
