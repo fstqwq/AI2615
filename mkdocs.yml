@@ -56,6 +56,7 @@ nav:
   - 网络流:
     - 基础结构: flow/basic.md
     - 更新残量网络: flow/update.md
+    - 二分图: flow/bipartite.md
   - 参考阅读:
     - 参考资料: ref/resources.md 
     - "unordered_map: 记一次有趣的 debug": ref/debug_unordered_map.md
