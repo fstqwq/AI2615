@@ -118,12 +118,12 @@ graph LR
 graph LR
     direction LR
     s
-    l1
-    l2
-    l3
+    l1:::concern
+    l2:::concern
+    l3:::concern
     r1:::notcalc
     r2:::notcalc
-    r3
+    r3:::concern
     t
     s -->|1| l1 & l2 & l3
     r1 & r2 -.-> t
@@ -132,6 +132,7 @@ graph LR
     l2 -.-> r2
     l3 -.-> r1 & r2
     classDef notcalc fill:#eee,stroke:#999
+    classDef concern fill:#f99,stroke:#a33
 ```
 
 因此，我们用最小割求出了一组最小点覆盖 $\{r_1, r_2\}$，与其对应的最大独立集是 $V \setminus \{r_1, r_2\}$。
