@@ -28,7 +28,9 @@ graph LR
 
 因为只有至多 $V / 2$ 个匹配，所以至多增广 $O(V)$ 次；每次使用 $O(E)$ 的 DFS。 因此总复杂度为 $O(VE)$。
 
-一个在中文算法竞赛语境下的「匈牙利」算法，本质是 Ford-Fulkerson。
+一个在中文算法竞赛语境下的「匈牙利」算法[^1]，本质是 Ford-Fulkerson。
+
+[^1]: 真正的 [匈牙利算法](https://en.wikipedia.org/wiki/Hungarian_algorithm) 是求最大权匹配的，也叫 KM 算法。
 
 #### Dinic
 
