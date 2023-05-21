@@ -53,7 +53,18 @@ int main() {
     
     然而，由于代码本身是存在 ub (undefined behavior，未定义行为) 的，优化器会默认有 ub 的代码是不会被运行的，因此在 OJ 上开启优化开关后运行出错。如果打开警告，编译器可以对这种情况进行提示。
     
-    ![](https://notes.sjtu.edu.cn/uploads/upload_732fa452f3351ae3e4b190a6d8bf54b5.png)
+    ```bash
+    ~$ g++ a.cpp -o a -g
+    ~$ g++ a.cpp -o a -g -Wall
+    a.cpp: In function ‘int factorials(int)’:
+    a.cpp:5:28: warning: value computed is not used [-Wunused-value]
+        5 |     else factorials(n - 1) * n; // oops, i forgot return
+        |          ~~~~~~~~~~~~~~~~~~^~~
+    a.cpp:6:1: warning: control reaches end of non-void function [-Wreturn-type]
+        6 | }
+        | ^
+    ~$
+    ```
 
     笔者通常使用的更多警告包括 `-Wextra -Wconversion -Wshadow`。
 	
