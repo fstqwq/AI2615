@@ -25,7 +25,7 @@ int dfs(u, flow):
 
     因此，你应当实现一个标记数组，来判断每个点是否被访问过。如果不这么做的话，可能会对于下面的图变为指数复杂度。   
 
-
+    <center>
     ```mermaid
     graph LR
         s -->|1| a
@@ -36,6 +36,7 @@ int dfs(u, flow):
         d & e -->|....| z
         z -->|0| t
     ```
+    </center>
 
 ### 使用 BFS 寻找增广路
 
@@ -79,11 +80,13 @@ if bfs(s) reaches t:
 
 首先，我们先用一个例子展示一下直接实现 DFS 仍然会让复杂度达到 $O(V + E)$ 的原因。
 
+<center>
 ```mermaid
 graph LR
     s ===> a ===> b ===> c ===> d ===> t
     s & a & b & c & d -..-> x & y & z 
 ```
+</center>
 
 如图，为了找到一条 $s$ 到 $t$ 的路，即使 $x, y, z$ 可能会被标记为访问过，但是指向他们的边仍然会被访问，这导致复杂度变成了 $O(V + E)$。
 
@@ -99,11 +102,13 @@ graph LR
 
 每次从头开始寻找增广路并不必要：如下图中，我们更新完 $s\rightarrow a \rightarrow b \rightarrow t$ 后返回到 $a$ 时，仍然有 $1$ 的流量没有用完；此时，回退到起点再按照同样的路径 DFS 到 $a$，流量仍然将会是 $1$。
 
+<center>
 ```mermaid
 graph LR
     s -->|2| a -->|1| b -->|1| t
     a -->|1| c -->|1| t
 ```
+</center>
 
 !!! info "多路增广"
     在递归返回时，如果流量没有耗尽，继续 DFS。
