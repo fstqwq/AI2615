@@ -73,7 +73,7 @@ struct edge {
     int to, flow, rid;
 };
 
-vector <int> G[N];
+vector <edge> G[N];
 
 void add_edge (int u, int v, int flow) {
     int uid = (int) G[u].size(),
