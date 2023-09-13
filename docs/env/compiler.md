@@ -105,11 +105,12 @@ g++ --version
 
     在此之后，**重新**打开命令行，你应当能够成功测试 g++ 版本。
 
+    ??? question "我的电脑上编译很慢，要花五秒以上。"
+        请检查自己的电脑是否打开省电模式。如果问题还没有解决，可以参考 [这里](https://fstqwq.pw/speedup-cpp-compilation/)。
+
     ### Windows: WSL
 
     如果你安装了 WSL (Windows Subsystem for Linux)，你可以考虑使用 Linux 的方式编译运行程序。这是一种能让你在 Windows 上拥有几乎原生 Linux 的体验的方式。
-
-    !!! info "除非你理解 WSL2 的文件系统缺陷，推荐使用 WSL1。"
 
     !!! TODO
         增加一个 WSL 教程。
