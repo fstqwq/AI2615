@@ -71,13 +71,13 @@ graph LR
 
 一个点集 $F$ 是图的点覆盖，指的是能够使得每条边的端点被至少选择一次的点集。
 
-$$ \forall (u, v) \in F, u \in F \lor v \in F.$$
+$$ \forall (u, v) \in E, u \in F \lor v \in F.$$
 
 #### 独立集
 
 一个点集 $I$ 被称为是独立集，指的是没有相邻点的点集。
 
-$$ \forall (u, v) \in I, u \notin I \lor v \notin I.$$
+$$ \forall (u, v) \in E, u \notin I \lor v \notin I.$$
 
 #### 独立集 = 点覆盖的补集
 
