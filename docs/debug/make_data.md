@@ -51,6 +51,14 @@ INPUT = 'input.txt'
 STD_OUTPUT = 'std.txt'
 CMP_OUTPUT = 'cmp.txt'
 
+if os.name == 'nt': # Windows uses a different prefix
+    STD = '.\\' + STD
+    CMP = '.\\' + CMP
+    DIFF = "fc"
+else:
+    STD = './' + STD
+    CMP = './' + CMP
+    DIFF = "diff"
 def gen(test):
     random.seed(test) # fixed seed to have reproducible results 
     f = open(INPUT, 'w')
@@ -69,16 +77,9 @@ def run():
         exit(1)
 
 def check():
-    if os.system(f'diff {STD_OUTPUT} {CMP_OUTPUT}'):
+    if os.system(f'{DIFF} {STD_OUTPUT} {CMP_OUTPUT}'):
         print("Wrong Answer")
         exit(1)
-
-if os.name == 'nt': # Windows uses a different prefix
-    STD = '.\\' + STD
-    CMP = '.\\' + CMP
-else:
-    STD = './' + STD
-    CMP = './' + CMP
 
 test = 0
 while True:
