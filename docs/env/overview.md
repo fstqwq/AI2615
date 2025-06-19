@@ -17,6 +17,8 @@
     * IDE: [Dev-C++ / Code::Blocks](./editor/devcpp.md)
     * IDE: [CLion](./editor/clion.md)
 
+    你也可以参考 [ACM 班程序设计 - 环境配置教程（2021 年）](https://acm.sjtu.edu.cn/wiki/%E6%96%87%E4%BB%B6:%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B.pdf) 来安装 WSL，CLion。
+
     !!! question "为什么不推荐使用 MSVC (Visual Studio)？"
         MSVC 编译器和 GCC 的编译器有一些不同。同时，从头开始安装 Visual Studio 是一个非常复杂的过程。
         

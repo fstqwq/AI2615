@@ -112,8 +112,7 @@ g++ --version
 
     如果你安装了 WSL (Windows Subsystem for Linux)，你可以考虑使用 Linux 的方式编译运行程序。这是一种能让你在 Windows 上拥有几乎原生 Linux 的体验的方式。
 
-    !!! TODO
-        增加一个 WSL 教程。
+    你可以参考 [ACM 班程序设计 - 环境配置教程（2021 年）](https://acm.sjtu.edu.cn/wiki/%E6%96%87%E4%BB%B6:%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B.pdf) 来安装 WSL。
 
 === "macOS"
     !!! warning "你的 g++ 可能是 clang++"

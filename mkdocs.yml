@@ -31,6 +31,7 @@ nav:
     - 输入输出与基本数据类型: cpp/io.md
     - 数组申请: cpp/array.md
     - STL 与现代 C++ 语法: cpp/stl.md
+    - 参考例题与题解 - 试机: cpp/problems.md
   - 调试:
     - 调试方法: debug/runtime.md
     - 编译错误: debug/compilation.md
@@ -40,7 +41,7 @@ nav:
     - 最近点对: divide_and_conqure/closest.md
     - 快速选择: divide_and_conqure/kth.md
     - 前三题的 Debug 提示: divide_and_conqure/hint.md
-    - 我实在写不完作业了，救救: divide_and_conqure/cheat.md
+    - 参考例题与题解 - 分治: divide_and_conqure/problems.md
   - 图论:
     - 图的存储: graph/data_structure.md
     - 图上搜索: graph/search.md

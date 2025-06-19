@@ -1,8 +1,25 @@
 # 欢迎
 
 这是 AI2615 算法设计与分析课程编程部分的指南。
-🥵🤡🉑
-好耶，居然支持 emoji。
+
+## 配置编程环境
+
+请参考 [环境配置](./env/overview.md)。
+
+## 复习编程基础
+
+请参考 [C++ 速成](./cpp/io.md)，与 [一些调试方法](./debug/runtime.md)。
+
+## 了解解题思路
+
+请在上方菜单栏选择对应的板块。
+
+## 参考代码实现
+
+以下是每个板块的参考实现汇总：
+
+- [试机：语言基础，STL 应用，与脑筋急转弯](./cpp/problems.md)
+
 ## 版权声明
 
 <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />

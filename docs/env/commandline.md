@@ -42,7 +42,7 @@ int main() {
     using namespace std;
     int factorials(int n) {
         if (n <= 1) return 1;
-        else factorials(n - 1) * n; // oops, i forgot return
+        else factorials(n - 1) * n; // Oops, I forgot return
     }
 
     int main() {
@@ -58,7 +58,7 @@ int main() {
     ~$ g++ a.cpp -o a -g -Wall
     a.cpp: In function ‘int factorials(int)’:
     a.cpp:5:28: warning: value computed is not used [-Wunused-value]
-        5 |     else factorials(n - 1) * n; // oops, i forgot return
+        5 |     else factorials(n - 1) * n; // Oops, I forgot return
         |          ~~~~~~~~~~~~~~~~~~^~~
     a.cpp:6:1: warning: control reaches end of non-void function [-Wreturn-type]
         6 | }
@@ -108,11 +108,9 @@ time ./a < input.txt
 ```
 
 如果使用 `/usr/bin/time` 甚至能粗略测出内存占用。
+
 ```bash
 /usr/bin/time ‐v ./a
 ```
 
-!!! TODO
-    更换该页图片为代码块。
-    
-    类似 `/usr/bin/time -v` 的用法在 macOS 下需要 `brew install gnu-time`，需要补充。
+类似 `/usr/bin/time -v` 的用法在 macOS 下可能需要 `brew install gnu-time`。
