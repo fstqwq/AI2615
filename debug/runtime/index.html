@@ -1,0 +1,2445 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Programming guide for AI2615, Algorithm Design and Analysis">
+      
+      
+        <meta name="author" content="fstqwq">
+      
+      
+        <link rel="canonical" href="https://ai2615.fstqwq.pw/debug/runtime/">
+      
+      
+        <link rel="prev" href="../../cpp/stl/">
+      
+      
+        <link rel="next" href="../compilation/">
+      
+      
+      <link rel="icon" href="../../_static/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>调试方法 - AI2615 Programming Guide</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../_static/css/extra.css">
+    
+      <link rel="stylesheet" href="../../_static/css/fonts.css">
+    
+      <link rel="stylesheet" href="../../_static/css/mathjax.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="red">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#输出调试与断言" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="AI2615 Programming Guide" class="md-header__button md-logo" aria-label="AI2615 Programming Guide" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17 21-2.75-3 1.16-1.16L17 18.43l3.59-3.59 1.16 1.41M12.8 21H5a2 2 0 0 1-2-2V5c0-1.11.89-2 2-2h14a2 2 0 0 1 2 2v7.8c-.88-.51-1.91-.8-3-.8l-1 .08V11H7v2h7.69A5.98 5.98 0 0 0 12 18c0 1.09.29 2.12.8 3m-.8-6H7v2h5m5-10H7v2h10"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AI2615 Programming Guide
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              调试方法
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="red"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11h3v2h-3zM1 11h3v2H1zM13 1v3h-2V1zM4.92 3.5l2.13 2.14-1.42 1.41L3.5 4.93zm12.03 2.13 2.12-2.13 1.43 1.43-2.13 2.12zM12 6a6 6 0 0 1 6 6c0 2.22-1.21 4.16-3 5.2V19a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-1.8c-1.79-1.04-3-2.98-3-5.2a6 6 0 0 1 6-6m2 15v1a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-1zm-3-3h2v-2.13c1.73-.44 3-2.01 3-3.87a4 4 0 0 0-4-4 4 4 0 0 0-4 4c0 1.86 1.27 3.43 3 3.87z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/fstqwq/AI2615" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    fstqwq/AI2615
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+  
+  引言
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../env/overview/" class="md-tabs__link">
+          
+  
+  
+  环境配置
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../cpp/io/" class="md-tabs__link">
+          
+  
+  
+  C++ 速成
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  调试
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../divide_and_conqure/closest/" class="md-tabs__link">
+          
+  
+  
+  分治
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../graph/data_structure/" class="md-tabs__link">
+          
+  
+  
+  图论
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../greedy/mst/" class="md-tabs__link">
+          
+  
+  
+  贪心
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../dp/iteration_equals_recursion/" class="md-tabs__link">
+          
+  
+  
+  动态规划
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../flow/basic/" class="md-tabs__link">
+          
+  
+  
+  网络流
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../ref/resources/" class="md-tabs__link">
+          
+  
+  
+  参考阅读
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="AI2615 Programming Guide" class="md-nav__button md-logo" aria-label="AI2615 Programming Guide" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17 21-2.75-3 1.16-1.16L17 18.43l3.59-3.59 1.16 1.41M12.8 21H5a2 2 0 0 1-2-2V5c0-1.11.89-2 2-2h14a2 2 0 0 1 2 2v7.8c-.88-.51-1.91-.8-3-.8l-1 .08V11H7v2h7.69A5.98 5.98 0 0 0 12 18c0 1.09.29 2.12.8 3m-.8-6H7v2h5m5-10H7v2h10"/></svg>
+
+    </a>
+    AI2615 Programming Guide
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/fstqwq/AI2615" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    fstqwq/AI2615
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    引言
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            引言
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    欢迎
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../disclaimer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    写在一切之前
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../acknowledgement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    鸣谢
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    环境配置
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            环境配置
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../env/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    总览
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    编辑器 / IDE 配置
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            编辑器 / IDE 配置
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../env/editor/vscode/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    VSCode
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../env/editor/devcpp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    DevCPP / Code::Blocks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../env/editor/clion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CLion
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../env/editor/vim/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vim
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../env/compiler/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    编译器配置
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../env/commandline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    使用命令行编译运行
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    C++ 速成
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            C++ 速成
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cpp/io/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    输入输出与基本数据类型
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cpp/array/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    数组申请
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cpp/stl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    STL 与现代 C++ 语法
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    调试
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            调试
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    调试方法
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    调试方法
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#输出调试与断言" class="md-nav__link">
+    <span class="md-ellipsis">
+      输出调试与断言
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gdb-调试" class="md-nav__link">
+    <span class="md-ellipsis">
+      GDB 调试
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sanitizer-调试" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sanitizer 调试
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stl-容器调试_glibcxx_debug" class="md-nav__link">
+    <span class="md-ellipsis">
+      STL 容器调试：_GLIBCXX_DEBUG
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#开栈" class="md-nav__link">
+    <span class="md-ellipsis">
+      开栈
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compilation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    编译错误
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oj/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    OJ 返回提交不正确
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../make_data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    构造数据与对拍
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    分治
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            分治
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../divide_and_conqure/closest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    最近点对
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../divide_and_conqure/kth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    快速选择
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../divide_and_conqure/hint/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    前三题的 Debug 提示
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../divide_and_conqure/cheat/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    我实在写不完作业了，救救
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    图论
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            图论
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph/data_structure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    图的存储
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph/search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    图上搜索
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph/sssp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    最短路
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph/2sat/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2-SAT
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph/negative_cycle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    负环
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    贪心
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            贪心
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../greedy/mst/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    最小生成树
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    动态规划
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            动态规划
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dp/iteration_equals_recursion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    递推与递归
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dp/lis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    最长下降子序列
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dp/tsp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    旅行商问题
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    网络流
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            网络流
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../flow/basic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    基础结构
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../flow/update/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    更新残量网络
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../flow/bipartite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    二分图
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    参考阅读
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            参考阅读
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ref/resources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    参考资料
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ref/debug_unordered_map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    unordered_map: 记一次有趣的 debug
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#输出调试与断言" class="md-nav__link">
+    <span class="md-ellipsis">
+      输出调试与断言
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gdb-调试" class="md-nav__link">
+    <span class="md-ellipsis">
+      GDB 调试
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sanitizer-调试" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sanitizer 调试
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stl-容器调试_glibcxx_debug" class="md-nav__link">
+    <span class="md-ellipsis">
+      STL 容器调试：_GLIBCXX_DEBUG
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#开栈" class="md-nav__link">
+    <span class="md-ellipsis">
+      开栈
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+  <h1>调试方法</h1>
+
+<p>调试程序错误总是令人苦恼的。这里我们主要介绍几种不依赖于 IDE 的调试方法，以期起到一定普适的介绍。</p>
+<p>我们将以这份代码为例，尝试找到其中出现的问题。
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">test</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">1e6</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="n">a</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+<span class="w">    </span><span class="n">test</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">test</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+以上代码将会递归调用 <code>test</code> 函数 <span class="arithmatex">\(10^6\)</span> 次，但是从第 10 次开始访问 <code>a</code> 数组就越界了。</p>
+<h3 id="输出调试与断言">输出调试与断言<a class="headerlink" href="#输出调试与断言" title="Permanent link"></a></h3>
+<p>你可以增加输出与断言并重新运行的方法来尝试找到程序错误，有时这种方法也叫打桩测试。</p>
+<p>尽管类似的功能可以通过调试器设置断点并输出的方法完成，但是这种方法在编译足够快时效率更高，更方便离线地（对于一段静态内容进行分析）而不是在线地（和程序进行大量交互）查错。</p>
+<p>对于上述代码，我们可以在可能出错的代码前后插入输出语句，来看对应运行中途过程是否是想要的。以上面代码为例：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">test</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;test &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">1e6</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="n">a</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+<span class="w">    </span><span class="n">test</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">test</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+此时，你的程序会在若干行 <code>test</code> 后被杀死，你可以直接针对输出 <span class="arithmatex">\(x\)</span> 的信息寻找问题。</p>
+<p>你也可以对一些条件进行断言，来判断程序是否按照预期进行。例如，我们可以在 <code>test</code> 函数中加入断言，来判断 <code>x</code> 是否会超过数组的范围：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">test</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">assert</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">1e6</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="n">a</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+<span class="w">    </span><span class="n">test</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">test</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+此时，你的程序会在断言失败时输出以下内容：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>Assertion<span class="w"> </span>failed:<span class="w"> </span>x<span class="w"> </span>&lt;<span class="o">=</span><span class="w"> </span><span class="m">10</span>,<span class="w"> </span>file<span class="w"> </span>a.cpp,<span class="w"> </span>line<span class="w"> </span><span class="m">5</span>
+</code></pre></div></td></tr></table></div>
+断言对于寻找一些简单的错误非常有用，同时由于其会在 OJ 上面显示 Runtime Error，因此也可以通过增删测试来从 OJ 结果里获得更多信息。</p>
+<h3 id="gdb-调试">GDB 调试<a class="headerlink" href="#gdb-调试" title="Permanent link"></a></h3>
+<p>调试器在运行时错误方面（特别是递归）拥有优势。除了 IDE 提供了可视化调试工具，你还可以使用 <code>gdb</code> 进行命令行调试。如果需要 <code>gdb</code> 输出信息，你可能需要打开 <code>-g</code> 编译开关。</p>
+<p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">test</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">1e6</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="n">a</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+<span class="w">    </span><span class="n">test</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">test</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+以上代码将会递归调用 <code>test</code> 函数 <span class="arithmatex">\(10^6\)</span> 次，但是从第 10 次开始访问 <code>a</code> 数组就越界了。一个参考的调试过程如下：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span></pre></div></td><td class="code"><div><pre><span></span><code>~$<span class="w"> </span>g++<span class="w"> </span>a.cpp<span class="w"> </span>-o<span class="w"> </span>a<span class="w"> </span>-g
+~$<span class="w"> </span>gdb<span class="w"> </span>a
+...
+Reading<span class="w"> </span>symbols<span class="w"> </span>from<span class="w"> </span>a...done.
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>r
+Starting<span class="w"> </span>program:<span class="w"> </span>~/a
+
+Program<span class="w"> </span>received<span class="w"> </span>signal<span class="w"> </span>SIGSEGV,<span class="w"> </span>Segmentation<span class="w"> </span>fault.
+0x000000000800076b<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nb">test</span><span class="w"> </span><span class="o">(</span><span class="nv">x</span><span class="o">=</span><span class="m">1008</span><span class="o">)</span><span class="w"> </span>at<span class="w"> </span>a.cpp:6
+<span class="m">6</span><span class="w">               </span>a<span class="o">[</span>x<span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>x<span class="p">;</span>
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>p<span class="w"> </span>x
+<span class="nv">$1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1008</span>
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>back
+<span class="c1">#0  0x000000000800076b in test (x=1008) at a.cpp:6</span>
+<span class="c1">#1  0x000000000800077b in test (x=1007) at a.cpp:7</span>
+<span class="c1">#2  0x000000000800077b in test (x=1006) at a.cpp:7</span>
+<span class="c1">#3  0x000000000800077b in test (x=1005) at a.cpp:7</span>
+<span class="c1">#4  0x000000000800077b in test (x=1004) at a.cpp:7</span>
+<span class="c1">#5  0x000000000800077b in test (x=1003) at a.cpp:7</span>
+<span class="c1">#6  0x000000000800077b in test (x=1002) at a.cpp:7</span>
+<span class="c1">#7  0x000000000800077b in test (x=1001) at a.cpp:7</span>
+<span class="c1">#8  0x000000000800077b in test (x=1000) at a.cpp:7</span>
+<span class="c1">#9  0x000000000800077b in test (x=999) at a.cpp:7</span>
+<span class="c1">#10 0x000000000800077b in test (x=998) at a.cpp:7</span>
+<span class="c1">#11 0x000000000800077b in test (x=997) at a.cpp:7</span>
+<span class="c1">#12 0x000000000800077b in test (x=996) at a.cpp:7</span>
+<span class="c1">#13 0x000000000800077b in test (x=995) at a.cpp:7</span>
+<span class="c1">#14 0x000000000800077b in test (x=994) at a.cpp:7</span>
+<span class="c1">#15 0x000000000800077b in test (x=993) at a.cpp:7</span>
+<span class="c1">#16 0x000000000800077b in test (x=992) at a.cpp:7</span>
+<span class="c1">#17 0x000000000800077b in test (x=991) at a.cpp:7</span>
+<span class="c1">#18 0x000000000800077b in test (x=990) at a.cpp:7</span>
+<span class="c1">#19 0x000000000800077b in test (x=989) at a.cpp:7</span>
+<span class="c1">#20 0x000000000800077b in test (x=988) at a.cpp:7</span>
+<span class="c1">#21 0x000000000800077b in test (x=987) at a.cpp:7</span>
+<span class="c1">#22 0x000000000800077b in test (x=986) at a.cpp:7</span>
+<span class="c1">#23 0x000000000800077b in test (x=985) at a.cpp:7</span>
+<span class="c1">#24 0x000000000800077b in test (x=984) at a.cpp:7</span>
+<span class="c1">#25 0x000000000800077b in test (x=983) at a.cpp:7</span>
+<span class="c1">#26 0x000000000800077b in test (x=982) at a.cpp:7</span>
+<span class="c1">#27 0x000000000800077b in test (x=981) at a.cpp:7</span>
+<span class="c1">#28 0x000000000800077b in test (x=980) at a.cpp:7</span>
+---Type<span class="w"> </span>&lt;<span class="k">return</span>&gt;<span class="w"> </span>to<span class="w"> </span><span class="k">continue</span>,<span class="w"> </span>or<span class="w"> </span>q<span class="w"> </span>&lt;<span class="k">return</span>&gt;<span class="w"> </span>to<span class="w"> </span>quit---q
+Quit
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>quit
+A<span class="w"> </span>debugging<span class="w"> </span>session<span class="w"> </span>is<span class="w"> </span>active.
+
+<span class="w">        </span>Inferior<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">[</span>process<span class="w"> </span><span class="m">15145</span><span class="o">]</span><span class="w"> </span>will<span class="w"> </span>be<span class="w"> </span>killed.
+
+Quit<span class="w"> </span>anyway?<span class="w"> </span><span class="o">(</span>y<span class="w"> </span>or<span class="w"> </span>n<span class="o">)</span><span class="w"> </span>y
+~$
+</code></pre></div></td></tr></table></div></p>
+<p>常用的指令有以下几个：</p>
+<ul>
+<li><code>b x</code>：在第 <code>x</code> 行设置断点。</li>
+<li><code>r</code>：运行程序。你可以使用 <code>r &lt; input.txt</code> 来指定输入文件。</li>
+<li><code>p x</code>：输出当前语句附近 <code>x</code> 这个表达式的值。<code>x</code> 可以是一个变量名，也可以是一句计算语句、一个函数调用。</li>
+<li><code>back</code>：输出当前的递归栈帧情况。</li>
+<li><code>up</code>：递归栈往上一层。</li>
+<li><code>down</code>：递归栈往下一层。</li>
+<li><code>c</code>：continue，继续运行。通常对断点使用，如果是程序错误，continue 会导致程序被杀死。</li>
+</ul>
+<p>GDB 功能很多，但是只需学会很小的子集便能开始发挥作用了。你可以亲自调试一下上面的代码，或者参考网络资料进行学习。</p>
+<h3 id="sanitizer-调试">Sanitizer 调试<a class="headerlink" href="#sanitizer-调试" title="Permanent link"></a></h3>
+<p>有时，我们使用 GDB 也看不出具体到底哪里出现问题了，这是因为 GDB 只有在程序出现很严重的问题的时候才能捕获到信号，导致真正的犯罪现场已经被破坏掉了。例如，上述程序中 <code>x = 10</code> 时就已经越界了，但是程序直到 <code>x</code> 更大的时候才会触发 <code>SIGSEGV</code>。</p>
+<p>部分编译器<sup id="fnref:com"><a class="footnote-ref" href="#fn:com">1</a></sup>为类似整数溢出、数组越界的情况提供了 sanitizer 调试工具。我们仍然以上面的代码为例，使用以下编译命令编译：</p>
+<p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>g++<span class="w"> </span>a.cpp<span class="w"> </span>-o<span class="w"> </span>a<span class="w"> </span>-g<span class="w"> </span>-fsanitize<span class="o">=</span>address<span class="w"> </span>-fsanitize<span class="o">=</span>undefined
+</code></pre></div></td></tr></table></div>
+运行，可以得到类似以下的 log：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span></pre></div></td><td class="code"><div><pre><span></span><code>~$<span class="w"> </span>./a
+<span class="nb">test</span><span class="w"> </span><span class="m">1</span>
+<span class="nb">test</span><span class="w"> </span><span class="m">2</span>
+<span class="nb">test</span><span class="w"> </span><span class="m">3</span>
+<span class="nb">test</span><span class="w"> </span><span class="m">4</span>
+<span class="nb">test</span><span class="w"> </span><span class="m">5</span>
+<span class="nb">test</span><span class="w"> </span><span class="m">6</span>
+<span class="nb">test</span><span class="w"> </span><span class="m">7</span>
+<span class="nb">test</span><span class="w"> </span><span class="m">8</span>
+<span class="nb">test</span><span class="w"> </span><span class="m">9</span>
+<span class="nb">test</span><span class="w"> </span><span class="m">10</span>
+a.cpp:7:5:<span class="w"> </span>runtime<span class="w"> </span>error:<span class="w"> </span>index<span class="w"> </span><span class="m">10</span><span class="w"> </span>out<span class="w"> </span>of<span class="w"> </span>bounds<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nb">type</span><span class="w"> </span><span class="s1">&#39;int [10]&#39;</span>
+a.cpp:7:7:<span class="w"> </span>runtime<span class="w"> </span>error:<span class="w"> </span>store<span class="w"> </span>to<span class="w"> </span>address<span class="w"> </span>0x7f0e0b006cc8<span class="w"> </span>with<span class="w"> </span>insufficient<span class="w"> </span>space<span class="w"> </span><span class="k">for</span><span class="w"> </span>an<span class="w"> </span>object<span class="w"> </span>of<span class="w"> </span><span class="nb">type</span><span class="w"> </span><span class="s1">&#39;int&#39;</span>
+0x7f0e0b006cc8:<span class="w"> </span>note:<span class="w"> </span>pointer<span class="w"> </span>points<span class="w"> </span>here
+<span class="w"> </span><span class="m">09</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w">  </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w">  </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w">  </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w">  </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span>
+<span class="w">              </span>^
+<span class="o">=================================================================</span>
+<span class="o">==</span><span class="nv">15175</span><span class="o">==</span>ERROR:<span class="w"> </span>AddressSanitizer:<span class="w"> </span>global-buffer-overflow<span class="w"> </span>on<span class="w"> </span>address<span class="w"> </span>0x7f0e0b006cc8<span class="w"> </span>at<span class="w"> </span>pc<span class="w"> </span>0x7f0e0ae02e75<span class="w"> </span>bp<span class="w"> </span>0x7fffd0fd7800<span class="w"> </span>sp<span class="w"> </span>0x7fffd0fd77f0
+WRITE<span class="w"> </span>of<span class="w"> </span>size<span class="w"> </span><span class="m">4</span><span class="w"> </span>at<span class="w"> </span>0x7f0e0b006cc8<span class="w"> </span>thread<span class="w"> </span>T0
+<span class="w">    </span><span class="c1">#0 0x7f0e0ae02e74 in test(int) ~/a.cpp:7</span>
+<span class="w">    </span><span class="c1">#1 0x7f0e0ae02eb8 in test(int) ~/a.cpp:8</span>
+<span class="w">    </span><span class="c1">#2 0x7f0e0ae02eb8 in test(int) ~/a.cpp:8</span>
+<span class="w">    </span><span class="c1">#3 0x7f0e0ae02eb8 in test(int) ~/a.cpp:8</span>
+<span class="w">    </span><span class="c1">#4 0x7f0e0ae02eb8 in test(int) ~/a.cpp:8</span>
+<span class="w">    </span><span class="c1">#5 0x7f0e0ae02eb8 in test(int) ~/a.cpp:8</span>
+<span class="w">    </span><span class="c1">#6 0x7f0e0ae02eb8 in test(int) ~/a.cpp:8</span>
+<span class="w">    </span><span class="c1">#7 0x7f0e0ae02eb8 in test(int) ~/a.cpp:8</span>
+<span class="w">    </span><span class="c1">#8 0x7f0e0ae02eb8 in test(int) ~/a.cpp:8</span>
+<span class="w">    </span><span class="c1">#9 0x7f0e0ae02eb8 in test(int) ~/a.cpp:8</span>
+<span class="w">    </span><span class="c1">#10 0x7f0e0ae02ed0 in main ~/a.cpp:11</span>
+<span class="w">    </span><span class="c1">#11 0x7f0e085a1c86 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21c86)</span>
+<span class="w">    </span><span class="c1">#12 0x7f0e0ae02a99 in _start (~/a+0x2a99)</span>
+
+0x7f0e0b006cc8<span class="w"> </span>is<span class="w"> </span>located<span class="w"> </span><span class="m">0</span><span class="w"> </span>bytes<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>right<span class="w"> </span>of<span class="w"> </span>global<span class="w"> </span>variable<span class="w"> </span><span class="s1">&#39;a&#39;</span><span class="w"> </span>defined<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s1">&#39;a.cpp:3:5&#39;</span><span class="w"> </span><span class="o">(</span>0x7f0e0b006ca0<span class="o">)</span><span class="w"> </span>of<span class="w"> </span>size<span class="w"> </span><span class="m">40</span>
+SUMMARY:<span class="w"> </span>AddressSanitizer:<span class="w"> </span>global-buffer-overflow<span class="w"> </span>~/a.cpp:7<span class="w"> </span><span class="k">in</span><span class="w"> </span>test<span class="o">(</span>int<span class="o">)</span>
+Shadow<span class="w"> </span>bytes<span class="w"> </span>around<span class="w"> </span>the<span class="w"> </span>buggy<span class="w"> </span>address:
+<span class="w">  </span>0x0fe2415f8d40:<span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span>
+<span class="w">  </span>0x0fe2415f8d50:<span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span>
+<span class="w">  </span>0x0fe2415f8d60:<span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span>
+<span class="w">  </span>0x0fe2415f8d70:<span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span>
+<span class="w">  </span>0x0fe2415f8d80:<span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">01</span><span class="w"> </span>f9<span class="w"> </span>f9<span class="w"> </span><span class="nv">f9</span>
+<span class="o">=</span>&gt;0x0fe2415f8d90:<span class="w"> </span>f9<span class="w"> </span>f9<span class="w"> </span>f9<span class="w"> </span>f9<span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="o">[</span>f9<span class="o">]</span>f9<span class="w"> </span>f9<span class="w"> </span>f9<span class="w"> </span>f9<span class="w"> </span>f9<span class="w"> </span>f9
+<span class="w">  </span>0x0fe2415f8da0:<span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span>
+<span class="w">  </span>0x0fe2415f8db0:<span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span>
+<span class="w">  </span>0x0fe2415f8dc0:<span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span>
+<span class="w">  </span>0x0fe2415f8dd0:<span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span>
+<span class="w">  </span>0x0fe2415f8de0:<span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span>
+Shadow<span class="w"> </span>byte<span class="w"> </span>legend<span class="w"> </span><span class="o">(</span>one<span class="w"> </span>shadow<span class="w"> </span>byte<span class="w"> </span>represents<span class="w"> </span><span class="m">8</span><span class="w"> </span>application<span class="w"> </span>bytes<span class="o">)</span>:
+<span class="w">  </span>Addressable:<span class="w">           </span><span class="m">00</span>
+<span class="w">  </span>Partially<span class="w"> </span>addressable:<span class="w"> </span><span class="m">01</span><span class="w"> </span><span class="m">02</span><span class="w"> </span><span class="m">03</span><span class="w"> </span><span class="m">04</span><span class="w"> </span><span class="m">05</span><span class="w"> </span><span class="m">06</span><span class="w"> </span><span class="m">07</span>
+<span class="w">  </span>Heap<span class="w"> </span>left<span class="w"> </span>redzone:<span class="w">       </span>fa
+<span class="w">  </span>Freed<span class="w"> </span>heap<span class="w"> </span>region:<span class="w">       </span>fd
+<span class="w">  </span>Stack<span class="w"> </span>left<span class="w"> </span>redzone:<span class="w">      </span>f1
+<span class="w">  </span>Stack<span class="w"> </span>mid<span class="w"> </span>redzone:<span class="w">       </span>f2
+<span class="w">  </span>Stack<span class="w"> </span>right<span class="w"> </span>redzone:<span class="w">     </span>f3
+<span class="w">  </span>Stack<span class="w"> </span>after<span class="w"> </span><span class="k">return</span>:<span class="w">      </span>f5
+<span class="w">  </span>Stack<span class="w"> </span>use<span class="w"> </span>after<span class="w"> </span>scope:<span class="w">   </span>f8
+<span class="w">  </span>Global<span class="w"> </span>redzone:<span class="w">          </span>f9
+<span class="w">  </span>Global<span class="w"> </span>init<span class="w"> </span>order:<span class="w">       </span>f6
+<span class="w">  </span>Poisoned<span class="w"> </span>by<span class="w"> </span>user:<span class="w">        </span>f7
+<span class="w">  </span>Container<span class="w"> </span>overflow:<span class="w">      </span><span class="nb">fc</span>
+<span class="w">  </span>Array<span class="w"> </span>cookie:<span class="w">            </span>ac
+<span class="w">  </span>Intra<span class="w"> </span>object<span class="w"> </span>redzone:<span class="w">    </span>bb
+<span class="w">  </span>ASan<span class="w"> </span>internal:<span class="w">           </span>fe
+<span class="w">  </span>Left<span class="w"> </span>alloca<span class="w"> </span>redzone:<span class="w">     </span>ca
+<span class="w">  </span>Right<span class="w"> </span>alloca<span class="w"> </span>redzone:<span class="w">    </span><span class="nv">cb</span>
+<span class="o">==</span><span class="nv">15175</span><span class="o">==</span>ABORTING
+</code></pre></div></td></tr></table></div></p>
+<p>尽管后面有一些看起来昏昏沉沉的内容，但是没关系！我们可以看到第一句：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>a.cpp:7:5:<span class="w"> </span>runtime<span class="w"> </span>error:<span class="w"> </span>index<span class="w"> </span><span class="m">10</span><span class="w"> </span>out<span class="w"> </span>of<span class="w"> </span>bounds<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nb">type</span><span class="w"> </span><span class="s1">&#39;int [10]&#39;</span>
+</code></pre></div></td></tr></table></div>
+说得很对，马上改代码。</p>
+<h3 id="stl-容器调试_glibcxx_debug">STL 容器调试：_GLIBCXX_DEBUG<a class="headerlink" href="#stl-容器调试_glibcxx_debug" title="Permanent link"></a></h3>
+<p>调试时，如果遇到访问 STL 容器越界但无法准确定位错误的问题，还可以在你的代码头文件前添加 <code>#define _GLIBCXX_DEBUG</code> 来将容器替换成容易调试（但速度可能会显著变慢）的版本。这个版本中的一些容器会积极主动地检查一些操作的前置条件是否满足，从而让错误尽早暴露。比如，对于以下的代码
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">vector</span><span class="w"> </span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">a</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+大多数时候，写入越界一个 int 的 <code>a[n]</code> 并不会报错。但是，如果使用 debug 容器，会收到以下运行时报错：</p>
+<p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><code>.../debug/vector:442:
+In function:
+    std::debug::vector&lt;_Tp, _Allocator&gt;::reference std::debug::vector&lt;_Tp,
+    _Allocator&gt;::operator[](size_type) [with _Tp = int; _Allocator =
+    std::allocator&lt;int&gt;; reference = int&amp;; size_type = long long unsigned
+    int]
+
+Error: attempt to subscript container with out-of-bounds index 5, but
+container only holds 5 elements.
+
+Objects involved in the operation:
+    sequence &quot;this&quot; @ 00000031069FF690 {
+      type = std::debug::vector&lt;int, std::allocator&lt;int&gt; &gt;;
+    }
+</code></pre></div></td></tr></table></div>
+如果你使用的是 libc++ 的编译器，可以使用 <code>#define _LIBCPP_ENABLE_ASSERTIONS 1</code> 来达到类似效果。详见<a href="https://shuiyuan.sjtu.edu.cn/t/topic/127129/106">提供该项内容的同学在水源的介绍</a>。</p>
+<h3 id="开栈">开栈<a class="headerlink" href="#开栈" title="Permanent link"></a></h3>
+<p>尽管在 OJ 上配置了无限栈，但是在本地调试时，你可能会遇到爆栈的问题。</p>
+<p>在 Linux 下，默认运行环境下栈是只有若干 MB 的，这在比如 dfs 深度大时会导致栈溢出。大多数 OJ 采用了无限栈，在 Linux 下要做到这一点，你可以使用以下命令（可能需要 <code>sudo</code>）
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nb">ulimit</span><span class="w"> </span>-s<span class="w"> </span>unlimited
+</code></pre></div></td></tr></table></div>
+请注意，如果你是实体 Linux 机，这么做可能导致死递归的时候占用非常大的内存，并导致系统由于不停交换内存死机。通常，将 <code>unlimited</code> 替换为 <code>104857600</code> （100MB）可能是合适的。 </p>
+<p>Windows 程序栈大小在编译时确定，你可以向 GCC 的编译选项添加<code>-Wl,-stack=104857600</code> 达到目的。</p>
+<p>MSVC 开栈指令不同；macOS 开栈方式也不同。请参考网络资料。</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:com">
+<p>Linux 下应该都是支持的，其他的得看情况。&#160;<a class="footnote-backref" href="#fnref:com" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; AI2615 SJTU
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.instant", "navigation.expand", "content.tabs.link", "content.code.copy"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+        <script src="../../_static/js/math-csr.js?math-csr"></script>
+      
+        <script src="../../_static/js/tex-mml-chtml.js?math-csr"></script>
+      
+    
+  </body>
+</html>
