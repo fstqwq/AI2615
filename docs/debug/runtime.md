@@ -262,7 +262,7 @@ Objects involved in the operation:
 ```
 如果你使用的是 libc++ 的编译器，可以使用 `#define _LIBCPP_ENABLE_ASSERTIONS 1` 来达到类似效果。详见[提供该项内容的同学在水源的介绍](https://shuiyuan.sjtu.edu.cn/t/topic/127129/106)。
 
-### 爆栈与开栈
+### 开栈
 
 尽管在 OJ 上配置了无限栈，但是在本地调试时，你可能会遇到爆栈的问题。
 

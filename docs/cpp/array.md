@@ -32,7 +32,7 @@ int main() {
 
 ### 使用 STL
 
-局部的动态数组可以考虑使用 STL 中的 `vector`，能够完成类似 Python `list` 的功能，在 [下一节](/cpp/stl#vector) 我们将会讨论。
+局部的动态数组可以考虑使用 STL 中的 `vector`，能够完成类似 Python `list` 的功能，在 [下一节](stl.md#vector) 我们将会讨论。
 ### new 和 malloc
 
 不建议使用 `new` 或者 `malloc` 申请数组，除非你知道你在干什么。

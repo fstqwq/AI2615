@@ -29,7 +29,7 @@ void traverse_the_graph () {
 ```
 
 !!! question "本地运行一个稍大的图就 Segment Fault 了，如何解决？"
-    请参考 [开栈](/debug/runtime/#开栈) 。
+    请参考 [开栈](../debug/runtime.md#开栈) 。
 
 ### BFS
 
