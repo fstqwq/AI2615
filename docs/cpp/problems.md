@@ -253,7 +253,6 @@
         S = input().split()
         T = input().split()
         f = {}
-        flag = True
         for s, t in zip(S, T):
             f[s] = t
         print("Yes" if all(f[s] == t for s, t in zip(S, T)) else "No")
