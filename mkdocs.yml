@@ -38,10 +38,10 @@ nav:
     - OJ 返回提交不正确: debug/oj.md
     - 构造数据与对拍: debug/make_data.md
   - 分治:
-    - 最近点对: divide_and_conqure/closest.md
-    - 快速选择: divide_and_conqure/kth.md
-    - 前三题的 Debug 提示: divide_and_conqure/hint.md
-    - 参考例题与题解 - 分治: divide_and_conqure/problems.md
+    - 最近点对: divide_and_conquer/closest.md
+    - 快速选择: divide_and_conquer/kth.md
+    - 前三题的 Debug 提示: divide_and_conquer/hint.md
+    - 参考例题与题解 - 分治: divide_and_conquer/problems.md
   - 图论:
     - 图的存储: graph/data_structure.md
     - 图上搜索: graph/search.md
