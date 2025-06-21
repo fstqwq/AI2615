@@ -19,6 +19,7 @@
 以下是每个板块的参考实现汇总：
 
 - [试机：语言基础，STL 应用，与脑筋急转弯](./cpp/problems.md)
+- [分治：快速选择，归并排序，最近点对，与一些杂题](./divide_and_conqure/problems.md)
 
 ## 版权声明
 
