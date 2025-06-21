@@ -6,7 +6,7 @@
 * $0 \leq l \leq r \leq n$;
 * 当 $l=r$ 时，$0 < l = r < n$;
 	* 也即，依据你的划分进行递归不会导致死递归。
-* 对于划分左侧的 `= pivot` 数量 $x$ 和右侧的数量 $y$，需要满足 $\max (x, y) \leq \max (10, 0.5 n)$。
+* 对于划分左侧的 `= pivot` 数量 $x$ 和右侧的 `= pivot` 数量 $y$，需要满足 $\max (x, y) \leq \max (10, 0.5 n)$。
 	* 也即，依据你的划分进行递归不会导致较严重的复杂度退化。
 
 * 数据范围：$1 \leq n \leq 10 ^ 5$, $a_i \in [0, 2 ^ {31})$, 保证数组中至少有一个元素等于 pivot。
@@ -117,6 +117,18 @@
                     return (l, l + 1)
             assert l == r + 1
             return (l, l)
+        ```
+    === "C++ (STL)"
+        ```cpp
+        pair<int, int> partition(vector <int> &a, int pivot) {
+            auto l = std::partition(a.begin(), a.end(), [&] (auto u) {
+                return u < pivot;
+            });
+            auto r = std::partition(l, a.end(), [&] (auto u) {
+                return u <= pivot;
+            });
+            return {l - a.begin(), r - a.begin()};
+        }
         ```
 
 

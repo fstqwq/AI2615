@@ -48,6 +48,7 @@ nav:
     - 最短路: graph/sssp.md
     - 2-SAT: graph/2sat.md
     - 负环: graph/negative_cycle.md
+    - 参考例题与题解 - 图论: graph/problems.md
   - 贪心:
     - 最小生成树: greedy/mst.md
   - 动态规划:

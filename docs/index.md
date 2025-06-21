@@ -20,6 +20,7 @@
 
 - [试机：语言基础，STL 应用，与脑筋急转弯](./cpp/problems.md)
 - [分治：快速选择，归并排序，最近点对，与一些杂题](./divide_and_conquer/problems.md)
+- [图论：搜索，最短路，负环，强连通分量，2-SAT](./graph/problems.md)
 
 ## 版权声明
 
