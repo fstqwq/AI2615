@@ -915,3 +915,122 @@
             print("NO")
         ```
 
+### [1804. Majority](https://acm.sjtu.edu.cn/OnlineJudge/problem/1804)
+
+
+众数电路 $\mathrm{Maj}_n$ 有 $n$ 个输入 $x_1,\dots,x_n$，如果**至少一半**的输入为 $1$，则输出 $1$，否则输出 $0$，即
+
+$$\mathrm{Maj}_n(x_1,\dots,x_n)=\left[2\sum_{i=1}^n x_i \geq n\right].$$
+
+构建一个单调的众数电路，对于给定的 $n$ 个布尔变量输入，使用不超过 $5 \times 10^4$ 个逻辑门，深度不超过 $14$，且仅包含 AND 和 OR 门。其中，每个逻辑门输入可以有多个，输出为 $1$ 个，要求总输入数量不超过 $2 \times 10^5$。
+
+* 数据范围：$2 \leq n \leq 64$
+
+??? Solution
+
+    > 题目来源：hld67890 于 ICPC Huawei Camp 2022 ([QOJ Link](https://qoj.ac/contest/1700/problem/8472))
+
+    尽管要求的是众数，实质上需要实现的是选出第 $\lceil n / 2 \rceil$ 大的数。如果设计一个 [排序网络](https://en.wikipedia.org/wiki/Sorting_network) 的话，就可以解决这个问题了。
+
+    由于深度要求是 $2 \cdot \log n + 2$，考虑使用归并排序的方法来满足深度要求。假设已经有两个等长的数组 $a, b$ 从大到小排好序了，接下来我们需要合并这两个数组。构造电路时我们无法像算法实现合并时一个一个取出元素，考虑对输出的每位写出其为 $1$ 的条件（其实就是卷积）：
+
+    $$
+    \mathrm{out}_i = \bigvee_{j=0}^i \left( a_j \land b_{i - j} \right).
+    $$
+
+    其中，$a, b$ 的下标从 $1$ 开始，$a_0$ 和 $b_0$ 是为了方便而设置的常数 $1$。这样，一次合并花费两层，我们一共需要合并 $\log_2 n$ 次，只需要确认总输入数量。两个长度为 $x$ 的数组合并时，至多有 $(x + 1) \times (x + 1)$ 个 AND 门，每个 AND 门有两个输入，且输出作为 OR 门的输入。所有层一共会用到的输入数量为：
+
+    $$ \sum_{i=1}^{8} 3 \cdot \left(\frac {2 ^ 8}{2 ^ i} + 1\right) ^ 2 \cdot 2 ^ {i - 1} = 104829.$$
+
+    === "C++"
+        ```cpp
+        #include <bits/stdc++.h>
+        using namespace std;
+
+        vector <pair <vector <int>, int>> nodes;
+
+        int AND(vector <int> u) {
+            nodes.push_back({u, 1});
+            return (int) nodes.size() - 1;
+        }
+
+        int OR(vector <int> u) {
+            nodes.push_back({u, 0});
+            return (int) nodes.size() - 1;
+        }
+
+        vector <int> solve (int l, int r) {
+            if (l == r) return {l};
+
+            int mid = (l + r) / 2;
+            vector <int> left = solve(l, mid);
+            vector <int> right = solve(mid + 1, r);
+            
+            vector <vector <int>> w(left.size() + right.size());
+
+            for (int i = 0; i < left.size(); i++)  w[i].push_back(left[i]);
+            for (int i = 0; i < right.size(); i++) w[i].push_back(right[i]);
+            for (int i = 0; i < left.size(); i++)
+                for (int j = 0; j < right.size(); j++)
+                    w[i + j + 1].push_back(AND({left[i], right[j]}));
+
+            vector <int> ret;
+            for (auto i : w) ret.push_back(OR(i));
+            return ret;
+        }
+
+        int main() {
+            int n;
+            cin >> n;
+            nodes.resize(n + 1);
+            auto ret = solve(1, n);
+            OR({ret[(n - 1) / 2]}); // Output node
+            cout << nodes.size() - 1 - n << '\n';
+            for (int i = n + 1; i < nodes.size(); i++) {
+                auto [E, type] = nodes[i];
+                cout << (type ? "AND" : "OR") << ' ' << E.size();
+                for (auto j : E) cout << ' ' << j;
+                cout << '\n';
+            }
+        }
+        ```
+    === "Python"
+        ```python
+        nodes = []
+
+        def AND(u):
+            nodes.append((u, 1))
+            return len(nodes) - 1
+
+        def OR(u):
+            nodes.append((u, 0))
+            return len(nodes) - 1
+
+        def solve(l, r):
+            if l == r:
+                return [l]
+            mid = (l + r) // 2
+            left = solve(l, mid)
+            right = solve(mid + 1, r)
+            w = [[] for _ in range(len(left) + len(right))]
+            for i in range(len(left)):
+                w[i].append(left[i])
+            for i in range(len(right)):
+                w[i].append(right[i])
+            for i in range(len(left)):
+                for j in range(len(right)):
+                    w[i + j + 1].append(AND([left[i], right[j]]))
+            ret = []
+            for i in w:
+                ret.append(OR(i))
+            return ret
+
+        n = int(input())
+        nodes = [([], 0)] * (n + 1)
+        ret = solve(1, n)
+        OR([ret[(n - 1) // 2]])  # Output
+        print(len(nodes) - 1 - n)
+        for i in range(n + 1, len(nodes)):
+            E, type_ = nodes[i]
+            print(("AND" if type_ else "OR"), len(E), *E)
+        ```
