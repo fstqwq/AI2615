@@ -1,6 +1,6 @@
 ### 模板相关
-C++ 还有一大特色：编译错误非常长，且晦涩难懂。
-得益于模板特性，下面一段简单的代码可能触发一长串来自 GCC 的连招：
+C++ 的编译错误有时候非常长，且晦涩难懂。得益于模板特性，下面一段简单的代码可能触发一长串来自 GCC 的连招：
+
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -10,7 +10,7 @@ int main() {
 }
 ```
 ```log
-fstqwq@DESKTOP-fstqwq:/mnt/c/code$ g++ a.cpp
+:~$ g++ a.cpp
 a.cpp: In function ‘int main()’:
 a.cpp:5:20: error: no matching function for call to ‘max(int, double)’
   cout << max(0, 0.0) << endl;
@@ -65,18 +65,18 @@ In file included from /usr/include/c++/7/algorithm:62:0,
 a.cpp:5:20: note:   mismatched types ‘std::initializer_list<_Tp>’ and ‘int’
   cout << max(0, 0.0) << endl;
                     ^
-fstqwq@DESKTOP-fstqwq:/mnt/c/code$
+:~$
 ```
-当你觉得编译错误不知所云的时候，请关注在你的代码里 error 的地方：比如上面的编译错误信息里，有模板库里的代码，也有你的代码。事实上，只需要关注这条信息就足够了：
+当编译错误不知所云的时候，请关注在输出里 error 在你的代码里的地方。事实上，只需要关注这条信息就足够了：
 ```log
 a.cpp:5:20: error: no matching function for call to ‘max(int, double)’
 ```
-因此你需要做的就是进行一次类型强转，保证 `max` 两边内容类型相同。
+因此需要做的就是进行一次类型强转，保证 `max` 两边内容类型相同。
 
 ### ld returned 1 exit status
 在 Windows 下，你可能会遇到类似这样的错误信息：
 ```log
-c:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/12.2.0/../../../../x86_64-w64-mingw32/bin/ld.exe: cannot open output file a.exe: Permission denied
+ld.exe: cannot open output file a.exe: Permission denied
 collect2.exe: error: ld returned 1 exit status
 ```
 这通常表明输出文件被占用了，通常是因为程序还在运行中。杀死运行中的程序重新编译即可。

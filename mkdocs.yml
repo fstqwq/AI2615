@@ -27,7 +27,7 @@ nav:
       - Vim: env/editor/vim.md
     - 编译器配置: env/compiler.md
     - 使用命令行编译运行: env/commandline.md
-  - C++ 速成:
+  - 试机:
     - 输入输出与基本数据类型: cpp/io.md
     - 数组申请: cpp/array.md
     - STL 与现代 C++ 语法: cpp/stl.md
@@ -40,7 +40,7 @@ nav:
   - 分治:
     - 最近点对: divide_and_conquer/closest.md
     - 快速选择: divide_and_conquer/kth.md
-    - 前三题的 Debug 提示: divide_and_conquer/hint.md
+    - Debug 提示: divide_and_conquer/hint.md
     - 参考例题与题解 - 分治: divide_and_conquer/problems.md
   - 图论:
     - 图的存储: graph/data_structure.md

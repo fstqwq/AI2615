@@ -45,7 +45,7 @@ int main() {
 using namespace std;
 int a[10];
 void test (int x) {
-    assert (x <= 10);
+    assert (x < 10);
     if (x > 1e6) return;
     a[x] = x;
     test (x + 1);
@@ -56,7 +56,7 @@ int main() {
 ```
 此时，你的程序会在断言失败时输出以下内容：
 ```bash
-Assertion failed: x <= 10, file a.cpp, line 5
+Assertion failed: x < 10, file a.cpp, line 5
 ```
 断言对于寻找一些简单的错误非常有用，同时由于其会在 OJ 上面显示 Runtime Error，因此也可以通过增删测试来从 OJ 结果里获得更多信息。
 

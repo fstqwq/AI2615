@@ -1,35 +1,10 @@
 ### 目标：像写 Python 一样写 C++
 
-不少同学会抱怨 Python 能非常方便处理的事情在 C++ 里全部需要自己写。事实上，你可以通过一些操作来让你的 C++ 在某些地方看起来像 Python 一样便利。
+使用 C++ 中的 STL 和相应的现代语法特性，可以使得编写 C++ 和 Python 一样便利。
 
 当然，C++ 和 Python 在很多地方仍然是本质不一样的，在 [最近点对](../divide_and_conquer/closest.md) 的翻译代码例子中我们可以体会到一部分，但这并不影响我们写出更「偷懒」而简短的代码。
 
-熟悉这些内容后，你可以在 [1786. Ctrl + R](https://acm.sjtu.edu.cn/OnlineJudge/problem/1786) 一题里测试常用的 `string`, `vector`, `map` 的用法。这是一道关于字符串处理的题。不使用 STL 的话，C 语言相关的字符串处理及其相关的数据结构都较为繁琐；然而，使用 STL 可以在几行代码内轻松搞定。以下是一份参考实现：
-
-```cpp
-int main() {
-	int n;
-	cin >> n;
-    vector <string> S;
-	for (int i = 0; i < n; i++) {
-		string s;
-		cin >> s;
-		S.push_back(s);
-	}
-    bool flag = true;
-    map <string, string> f;
-	for (auto s : S) {
-        string t;
-        cin >> t;
-		if (f.count(s) && f[s] != t) {
-            flag = false;
-            break;
-		}
-		else f[s] = t;
-	}
-	cout << (flag ? "Yes\n" : "No\n");
-}
-```
+熟悉这些内容后，你可以在 [1786. Ctrl + R](https://acm.sjtu.edu.cn/OnlineJudge/problem/1786) 一题里测试常用的 `string`, `vector`, `map` 的用法。这是一道关于字符串处理的题。不使用 STL 的话，C 语言相关的字符串处理及其相关的数据结构都较为繁琐；然而，使用 STL 可以在几行代码内轻松搞定。
 
 ### STL
 
