@@ -891,6 +891,8 @@
 
 ??? Solution
 
+    > 题目来源：fstqwq 编的
+
     $O(k \log k)$ 的非严格 $k$ 短路算法（即，相同权重算多条的 $k$ 短路算法）是无法通过这个题的，因为可能存在 ${m \choose k - 1}$ 条等于严格 $k$ 短路的值的路径。采用类似 SPFA 或者 A* 的迭代亦是如此。
 
     以下做法并非预期做法，*~~但跑得很快，可以通过~~* 基本上比较难跑过。
@@ -1093,5 +1095,130 @@
                 current_kth = next_kth;
             }
             cout << endl;
+        }
+        ```
+
+### [2654. Exploration boundary](https://acm.sjtu.edu.cn/OnlineJudge/problem/2654)
+
+探索边界是指在一次运行 Dijkstra 算法的过程中，某个顶点出队前的一瞬间，所有在优先队列里的顶点集合。例如下图中，$S$ 是原点，左边的是距离为 $2$ 的顶点出队前瞬间，右边是其出队并更新后（即距离为 $3$ 的顶点出队前）的探索边界。
+
+![](../_static/upload/2654.png)
+
+给定一个无向图 $G$，但边权未知。某些探索边界可以在不同的权值下运行 Dijkstra 算法时出现，但它们不能出现在同一组权值下的 Dijkstra 算法运行过程中，如下图。
+
+![](../_static/upload/2654-2.png)
+
+给定一些探索边界，设源顶点 $s = 1$，构造每条边的权重（如果可能的话），使得：1. 每条边的权重为正整数且不超过 $10^9$；2. 没有两个顶点与 $1$ 的距离相同；3. 所有探索边界在从 $1$ 开始的 Dijkstra 算法运行过程中都出现过。
+
+* 数据范围：共 $T \leq 10^5$ 组数据，每组数据中 $2 \leq n \leq 2 \times 10^5$, $1 \leq m \leq 2 \times 10^5$, $1 \leq k \leq 2 \times 10^5$, 且所有测试点的 $n$ 之和、$m$ 之和以及 $b_i$ 之和均不超过 $10^6$。
+
+??? Solution
+    
+    > 题目来源：fstqwq 于 ICPC EC-Final 2024 ([QOJ Link](https://qoj.ac/contest/1894/problem/9985))
+
+    > 参考阅读：Universal Optimality of Dijkstra via Beyond-Worst-Case Heaps, [https://rihl.uralyx.cz/dijkstra-focs2024/](https://rihl.uralyx.cz/dijkstra-focs2024/)
+
+    当一个点集成为边界时，整张图被 Dijkstra 算法分为三部分：
+    
+    - **边界内**：已经被访问过的部分，也即当前已知距离的点；
+    - **边界上**：在优先队列里的边界，也即当前已知距离的点的未知邻居的并集；
+    - **边界外**：其余无法被已经访问过的部分的看见的点。
+
+    由于 Dijkstra 算法按照最短距离递增的顺序访问每个点，边界上和边界外的点距离不小于边界内的点的距离。基于这个观察，我们可以把边界看做城墙，那么从起点能到的点就应当是边界内的点点集，随后可以验证边界是否正确。这个过程可以通过 BFS 实现。
+
+    现在考虑多个边界。如果我们把一系列相容的边界所围住的点写出来，一定是一系列互相包含的集合，从小到大的顺序就是他们出现的顺序，且可以通过不停添加边界点来得到这个集合顺序。
+
+    直接实现这个求集合的过程是平方的，但是我们事实上并不需要直接求出每个集合。考虑一开始将所有城墙全部建在图上，随后进行 BFS 来尝试访问所有能到的点，并记录阻挡住 BFS 的点（也即 Dijkstra 的优先队列内未出队点），直到 BFS 停下来。此时，阻挡住 BFS 的点应当构成一个边界集合（否则无解），将其拆掉继续 BFS 即可。一个顶点上可能有多堵城墙，此时类似拓扑排序的处理入度的方法计数即可。
+
+    按照上述方法，我们可以得到一个顶点顺序，满足这个出队顺序的边权即可构成所需边界序列。依照这个顺序，我们可以构造势能：第 $i$ 个 BFS 出队的点势能是 $i$，那么对于在势能为 $w_u$ 和 $w_v$ 之间的边权值设为 $|w_u - w_v|$ 即可保证出队顺序。由于要构造使得所有点距离互不相同，即使所有所需边界全部出现了，仍需继续运行 BFS 来获得正确的拓扑序，否则可能在最后一个边界外的点出现乱序，导致出现相同的最短距离。
+
+    如果实现了线性判断集合是否相同（如集合 hash），时间复杂度为 $O(n + m + \sum|b_i|)$。亦可以直接使用 `std::sort` 或 `std::set`，每次直接寻找给定集合是否出现，时间复杂度为 $O(n + m + \sum|b_i| \log \sum |b_i|)$。
+
+    === "C++"
+        ```cpp
+        #include <bits/stdc++.h>
+        using namespace std;
+        const int INF = 1e9;
+
+        void work() {
+            int n, m;
+            cin >> n >> m;
+            vector <vector <int>> E(n + 1);
+            vector <int> tag(n + 1);
+            set <vector <int>> s;
+            vector <pair <int, int>> input_edges;
+            for (int i = 0; i < m; i++) {
+                int u, v;
+                cin >> u >> v;
+                input_edges.push_back({u, v});
+                E[u].push_back(v);
+                E[v].push_back(u);
+            }
+
+            int k;
+            cin >> k;
+            for (int i = 0; i < k; i++) {
+                int c; cin >> c;
+                vector <int> vec;
+                for (int _ = 0; _ < c; _++) {
+                    int x; cin >> x;
+                    vec.push_back(x);
+                    tag[x] ++;
+                }
+                sort(vec.begin(), vec.end());
+                s.insert(vec);
+            }
+            
+            queue <int> q;
+            set <int> froniter;
+            vector <int> rk(n + 1, INF), vis(n + 1, 0);
+            vis[1] = 1;
+            if (tag[1]) {
+                froniter.insert(1);
+            } else {
+                q.push(1);
+            }
+            int cnt = 0;
+            while (!s.empty() || !q.empty()) {
+                while (!q.empty()) {
+                    int u = q.front(); q.pop();
+                    rk[u] = ++cnt;
+                    for (int v : E[u]) {
+                        if (!vis[v]) {
+                            vis[v] = 1;
+                            if (tag[v]) {
+                                froniter.insert(v);
+                            } else {
+                                q.push(v);
+                            }
+                        }
+                    }
+                }
+                if (s.empty()) break;
+                vector <int> current(froniter.begin(), froniter.end());
+                auto it = s.find(current);
+                if (it != s.end()) {
+                    s.erase(it);
+                    for (int x : current) {
+                        if (--tag[x] == 0) {
+                            q.push(x);
+                            froniter.erase(x);
+                        }
+                    }
+                } else {
+                    cout << "No\n";
+                    return;
+                }
+            }
+
+            cout << "Yes\n";
+            for (auto [u, v] : input_edges) cout << abs(rk[u] - rk[v]) << ' ';
+            cout << '\n';
+        }
+
+        int main() {
+            cin.tie(0)->sync_with_stdio(0);
+            int T; cin >> T;
+            while (T--) work();
         }
         ```
