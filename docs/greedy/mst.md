@@ -25,51 +25,49 @@ Kruskal 查询连通性的基础组件是并查集，我们需要一个快速的
 
 #### 路径压缩
 ```cpp
-int f[N];
-void init (int n) {
-    for (int i = 1; i <= n; i++) f[i] = i;
-}
-int getf(int x) {
-    return f[x] == x ? x : (f[x] = getf(f[x]));
-}
-bool merge (int x, int y) {
-    x = getf(x), y = getf(y);
-    if (x != y) {
-        f[x] = y;
-        return true;
+struct UFSet {
+    vector <int> f;
+    UFSet(int n) : f(n + 1) {
+        for (int i = 0; i <= n; i++) f[i] = i;
+    } 
+    int getf(int x) {
+        return f[x] == x ? x : (f[x] = getf(f[x]));
     }
-    return false;
-}
+    bool merge (int x, int y) {
+        x = getf(x), y = getf(y);
+        if (x != y) {
+            f[x] = y;
+            return true;
+        }
+        return false;
+    }
+};
 ```
 
 通常来说，单纯路径压缩的并查集已经跑得足够快了，这是路径压缩的 $\log$ 难跑满；而 $\log$ 在实用的范围内与 $\alpha$ 差距只有至多 $5$ 倍，因此常数优化甚至能起到更好的效果。例如，在上面修改为 `f[x] = getf(f[f[x]])` 能在绝大多数情况下跑得比加了优化的并查集快。
 
-#### 路径压缩 + 按大小合并
+#### 路径压缩 + 按秩合并
 
-!!! question "为什么不实现按秩合并？"
-    - 两者在复杂度上是等价的；
-    - 两者互相修改起来非常方便；
-    - 大小信息通常比秩信息有用。
-
-这里介绍一种不需要额外内存的方法。注意到，一棵子树的根指向自己其实只提供了一个 bit 的信息，因此我们可以用这块内存存储子树大小，方法是将根节点的 `f` 存储子树大小取负。请注意，此时一定不要用 0 标号。
+这里介绍一种不需要额外内存的方法。注意到，一棵子树的根指向自己其实只提供了一个 bit 的信息，因此我们可以用这块内存存储子树大小，方法是将根节点的 `f` 存储子树大小取负。
 
 ```cpp
-int f[N];
-void init (int n) {
-    for (int i = 1; i <= n; i++) f[i] = -1;
-}
-int getf(int x) {
-    return f[x] < 0 ? x : (f[x] = getf(f[x]));
-}
-bool merge (int x, int y) {
-    x = getf(x), y = getf(y);
-    if (x != y) {
-        if (f[x] > f[y]) swap(x, y); // size[x] < size[y]
-        // merge : x <- y
-        f[x] += f[y]; // size[x] += size[y]
-        f[y] = x;
-        return true;
+struct UFSet {
+    vector <int> f;
+    UFSet(int n) : f(n + 1, -1) {} 
+    int getf(int x) {
+        return f[x] < 0 ? x : (f[x] = getf(f[x]));
     }
-    return false;
-}
+    bool merge (int x, int y) {
+        x = getf(x), y = getf(y);
+        if (x != y) {
+            if (f[x] > f[y]) {
+                swap(x, y);
+            } // f[x] <= f[y], rank[x] >= rank[y], merge y into x
+            f[x] = min(f[x], f[y] - 1); // rank[x] = max(rank[x], rank[y] + 1)
+            f[y] = x;
+            return true;
+        }
+        return false;
+    }
+};
 ```

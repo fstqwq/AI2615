@@ -775,6 +775,79 @@
             print('No')
         ```
 
+### [1452. If only](https://acm.sjtu.edu.cn/OnlineJudge/problem/1452)
+
+有一个玩家在一张无向图上玩游戏，玩家现在在 $s$ 号点，他希望在 $k$ 秒后恰好移动到 $t$ 号点。玩家每秒必须移动到相邻的结点上。你需要判断：如果玩家采取最优策略，是否能达成目标。如果玩家某时刻无法移动，亦视为任务失败。
+
+* 数据范围：$2 \leq n \leq 10 ^ 5, 1 \leq m \leq 10 ^ 5, 1 \leq k \leq 10 ^ 9, 1 \leq s \neq t \leq n$
+
+??? Solution
+
+    无向图上任何一条边都可以来回移动，只要 $s$ 不是孤立的，就可以花费 $2$ 的代价来回走动。因此，我们只关心每个点的奇数步数和偶数步数的最短路，将每个点拆为奇和偶两个点即可。
+
+    === "C++"
+        ```cpp
+        #include <bits/stdc++.h>
+        using namespace std;
+        const int INF = 1e9 + 1;
+
+        int main() {
+            int n, m, s, t, k;
+            cin >> n >> m >> s >> t >> k;
+            vector <vector <int>> E(n + 1);
+            for (int i = 0; i < m; i++) {
+                int u, v;
+                cin >> u >> v;
+                E[u].push_back(v);
+                E[v].push_back(u);
+            }
+            vector <array<int, 2>> dis(n + 1, {INF, INF});
+            queue <array<int, 2>> q;
+            dis[s][0] = 0;
+            q.push({s, 0});
+            while (!q.empty()) {
+                auto [u, parity] = q.front();
+                q.pop();
+                for (auto v : E[u]) {
+                    if (dis[v][parity ^ 1] > dis[u][parity] + 1) {
+                        dis[v][parity ^ 1] = dis[u][parity] + 1;
+                        q.push({v, parity ^ 1});
+                    }
+                }
+            } 
+            cout << (dis[t][k & 1] <= k ? "Yes" : "No") << endl;
+        }
+        ```
+    === "Python"
+        ```python
+        import sys
+        from collections import deque
+
+        n, m, s, t, k = map(int, input().split())
+        E = [[] for _ in range(n + 1)]
+        
+        for _ in sys.stdin.readlines():
+            u, v = map(int, _.split())
+            E[u].append(v)
+            E[v].append(u)
+        
+        INF = 10**9 + 1
+        dis = [[INF, INF] for _ in range(n + 1)]
+        q = deque()
+        
+        dis[s][0] = 0
+        q.append((s, 0))
+        
+        while q:
+            u, parity = q.popleft()
+            for v in E[u]:
+                if dis[v][parity ^ 1] > dis[u][parity] + 1:
+                    dis[v][parity ^ 1] = dis[u][parity] + 1
+                    q.append((v, parity ^ 1))
+        
+        print("Yes" if dis[t][k % 2] <= k else "No")
+        ```
+
 ### [1739. Bracket Query](https://acm.sjtu.edu.cn/OnlineJudge/problem/1739)
 
 给定一个合法的括号序列的长度 $n$ 和 $q$ 个查询，每个查询给出一个区间 $[l_i, r_i]$ 和该区间内左括号数减去右括号数的差 $c_i$。要求根据这些查询判断是否存在一个合法的括号序列满足所有查询，如果存在则输出一个可能的序列，否则输出 `?`。
