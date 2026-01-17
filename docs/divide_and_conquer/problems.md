@@ -1,7 +1,24 @@
 
 ### [1953. Partition](https://acm.sjtu.edu.cn/OnlineJudge/problem/1953)
 
-实现一个划分函数，将数组根据给定的 pivot 划分为三部分：小于等于 pivot 的部分、等于 pivot 的部分和大于等于 pivot 的部分。返回划分后的边界位置 l 和 r。要求：
+实现在快速选择中的划分函数：给定一个数组，和一个 pivot。重新排序数组，使得数组根据给定的 pivot 划分为三部分[^part]：小于等于 pivot 的部分、等于 pivot 的部分和大于等于 pivot 的部分。返回划分后的边界位置 l 和 r。
+
+[^part]: 这里的划分取了不同的划分的可能结果的并集：划分点两侧的部分都允许等于 pivot 的元素存在。因此，后续正确性要求亦是基于这个并集的定义来衡量。
+
+```text
+
+```cpp
+pair<int, int> partition(vector <int> &a, int pivot) {
+    // TODO: implement partition
+}
+```
+
+```python
+def partition(a, pivot):
+    # TODO: implement partition
+```
+
+为了测试这个函数的的功能性，要求：
 
 * $0 \leq l \leq r \leq n$;
 * 当 $l=r$ 时，$0 < l = r < n$;
@@ -134,7 +151,7 @@
 
 ### [1300. k-th Smallest Number](https://acm.sjtu.edu.cn/OnlineJudge/problem/1300)
 
-给定 $n$ 个正整数，请找出其中的第 $k$ 小的数。
+给定 $n$ 个非负整数，请找出其中的第 $k$ 小的数。
 
 * 数据范围：$1 \leq k \leq n \leq 4\times 10^7, 0 \leq a_i < 2^{31}$
 
@@ -706,7 +723,7 @@
 
 ??? Solution
 
-    三角形边长的最大值超过了周长的一半，因此有和最近点对问题类似的复杂度分析和解法。
+    三角形边长的最大值不超过周长的一半，因此有和最近点对问题类似的复杂度分析和解法。
 
     !!! warning "注意递归边界"
         
@@ -961,7 +978,7 @@ $$\mathrm{Maj}_n(x_1,\dots,x_n)=\left[2\sum_{i=1}^n x_i \geq n\right].$$
 
     其中，$a, b$ 的下标从 $1$ 开始，$a_0$ 和 $b_0$ 是为了方便而设置的常数 $1$。这样，一次合并花费两层，我们一共需要合并 $\log_2 n$ 次，只需要确认总输入数量。两个长度为 $x$ 的数组合并时，至多有 $(x + 1) \times (x + 1)$ 个 AND 门，每个 AND 门有两个输入，且输出作为 OR 门的输入。所有层一共会用到的输入数量为：
 
-    $$ \sum_{i=1}^{8} 3 \cdot \left(\frac {2 ^ 8}{2 ^ i} + 1\right) ^ 2 \cdot 2 ^ {i - 1} = 104829.$$
+    $$ \sum_{i=1}^{6} 3 \cdot \left(\frac {2 ^ 6}{2 ^ i} + 1\right) ^ 2 \cdot 2 ^ {i - 1} = 7389.$$
 
     === "C++"
         ```cpp
