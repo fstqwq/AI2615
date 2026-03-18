@@ -20,7 +20,7 @@
     - 无论之前是否存在，令其不存在：`mask & (~(1 << i))`
 * 对全集取反：`~mask & ((1 << n) - 1)`，或者 `mask ^ ((1 << n) - 1)`
 * 计算 `mask` 二进制中 $1$ 的个数: `__builtin_popcount(mask)`
-    - 对于 long long，需要使用 `__buitin_popcountll`
+    - 对于 long long，需要使用 `__builtin_popcountll(mask)`
 
 举个例子，如果我们想枚举 `mask` 里的元素，你可以这么做：
 

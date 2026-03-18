@@ -448,7 +448,7 @@
 
 ### [2535. Array Game](https://acm.sjtu.edu.cn/OnlineJudge/problem/2535)
 
-这是一道交互题。有一列 $n$ 个数 $a_1, a_2, \dots, a_n$。Alice 和 Bob 每次能从头或者尾取走一个数，Alice 先手。双方的最终收益为取走的数之和。你是 Bob，请计算游戏对方在最优策略下你能获得的最大收益。
+这是一道交互题。有一列 $n$ 个数 $a_1, a_2, \dots, a_n$。Alice 和 Bob 每次能从头或者尾取走一个数，Alice 先手。双方的最终收益为取走的数之和。你是 Bob，请计算在 Alice 采取最优策略下你能获得的最大收益。
 
 * 数据范围：$2 \leq n \leq 100$, $0 \leq a_i \leq 100$
 
@@ -487,7 +487,7 @@
 
 ### [1432. Colorful inversion](https://acm.sjtu.edu.cn/OnlineJudge/problem/1432)
 
-请对于每个 $i$，输出以 $a_i$ 结尾的最长下降子序列长度。
+对于每个 $i$，请输出以 $a_i$ 结尾的最长下降子序列长度。
 
 * 数据范围：$1 \leq n \leq 10^5$, $1 \leq a_i \leq 10^6$
 
@@ -607,7 +607,7 @@
 
 ### [1856. Travelling Salesman Problem](https://acm.sjtu.edu.cn/OnlineJudge/problem/1856)
 
-给一个 $n$ 个点的非负权有向图，求经过所有点的回路的最短长度。其中，每个点可以经过多次。
+给定一个 $n$ 个点的非负权有向图，求经过所有点的回路的最短长度。其中，每个点可以经过多次。
 
 * 数据范围：$1 \leq n \leq 20$, $0 \leq w_{ij} \leq 10^5$
 
