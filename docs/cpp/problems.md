@@ -71,7 +71,7 @@
 
     因此，如果 $\leq n$ 的质数有 $p$ 个，答案为 $2p / n^2$。
 
-    由于 $p \leq n$，因此答案不超过 $2 / n$（或者，使用质数定理可以得到更准确的估计：$O(1 / n \log n)$）。因此，若要满足 $\varepsilon$ 的精度要求，对于超过 $\frac{1}{2 / \varepsilon}$ （或者 $\frac{ 1 }{-\varepsilon \log \varepsilon}$）的 $n$，答案均可以输出 $0$。
+    由于 $p \leq n$，因此答案不超过 $2 / n$（或者，使用质数定理可以得到更准确的估计：$O(1 / n \log n)$）。因此，若要满足 $\varepsilon$ 的精度要求，对于超过 $\frac{2}{\varepsilon}$ 的 $n$，答案均可以输出 $0$。
 
     使用最朴素的判定质数算法，复杂度为 $O(\frac {1}{\varepsilon} \sqrt \frac {1}{\varepsilon})$。
     
