@@ -1,6 +1,6 @@
 本题我们提供了代码模板和参考 Python 实现，你可以使用模板和参考代码完成该题。
 
-### [1299. Closest pair](https://acm.sjtu.edu.cn/OnlineJudge/problem?problem_id=1299)
+### [1299. Closest pair](https://acm.sjtu.edu.cn/OnlineJudge/problem/1299)
 
 给定 $n$ 个二维欧几里得平面上的整点 $p_1, p_2, \dots, p_n$，请输出距离最近的两个点的距离的平方。
 

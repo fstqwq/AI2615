@@ -8,7 +8,7 @@
         - Python 容易上手只是因为大多数情况下使用别人提供的库即可，不需要自己动手。
         - 在不熟练的情况下，调试 Python 遇到的问题会更难处理。
 
-[1294. A+B Problem](https://acm.sjtu.edu.cn/OnlineJudge/problem?problem_id=1294) 一个可能的实现是这样的：
+[1294. A+B Problem](https://acm.sjtu.edu.cn/OnlineJudge/problem/1294) 一个可能的实现是这样的：
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -87,7 +87,7 @@ int main() {
 
 #### 使用浮点数
 
-有时，你可能需要使用浮点数（如 [1295. #include <random\>](https://acm.sjtu.edu.cn/OnlineJudge/problem?problem_id=1295)），并输出指定位数，默认的输出科学计数法的方式不能满足我们的要求。笔者更推荐使用 `printf` 来完成格式化输出，例如输出 3 位小数 `x` 可以这么做：
+有时，你可能需要使用浮点数（如 [1295. #include <random\>](https://acm.sjtu.edu.cn/OnlineJudge/problem/1295)），并输出指定位数，默认的输出科学计数法的方式不能满足我们的要求。笔者更推荐使用 `printf` 来完成格式化输出，例如输出 3 位小数 `x` 可以这么做：
 
 * `double`: `printf("%.3lf", x);`
 * `long double`: `printf("%.3Lf", x);`

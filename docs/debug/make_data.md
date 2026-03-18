@@ -2,7 +2,7 @@
 
 然而，这并不代表你对于隐藏的数据无可奈何：你可以通过自己生成数据的方法测试程序。
     
-我们以 [1300. k-th Smallest Number](https://acm.sjtu.edu.cn/OnlineJudge/problem?problem_id=1300) 为例，给出一系列生成数据与对拍的办法。
+我们以 [1300. k-th Smallest Number](https://acm.sjtu.edu.cn/OnlineJudge/problem/1300) 为例，给出一系列生成数据与对拍的办法。
 
 这道题的输入自带了一个随机数据生成器，因此我们可以用下列输入直接构造出随机极限数据：
 ```

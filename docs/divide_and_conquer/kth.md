@@ -1,6 +1,6 @@
 从本题起，请独立完成。
 
-### [1300. k-th Smallest Number](https://acm.sjtu.edu.cn/OnlineJudge/problem?problem_id=1300)
+### [1300. k-th Smallest Number](https://acm.sjtu.edu.cn/OnlineJudge/problem/1300)
 
 给定 $n$ 个非负整数，请找出其中的第 $k$ 小的数。
 

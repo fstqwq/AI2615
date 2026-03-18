@@ -2,9 +2,9 @@
 
 !!! success "我是 DDL 战神！"
 
-    * [1300. k-th Smallest Number](https://acm.sjtu.edu.cn/OnlineJudge/problem?problem_id=1300): 提交排序代码来获得 70 分。
-    * [1301. Bubbling Bubbles](https://acm.sjtu.edu.cn/OnlineJudge/problem?problem_id=1301): 提交冒泡排序代码来获得 70 分。
-    * [1302. Optimal Sort](https://acm.sjtu.edu.cn/OnlineJudge/problem?problem_id=1302): 提交样例代码来获得 10 分。
+    * [1300. k-th Smallest Number](https://acm.sjtu.edu.cn/OnlineJudge/problem/1300): 提交排序代码来获得 70 分。
+    * [1301. Bubbling Bubbles](https://acm.sjtu.edu.cn/OnlineJudge/problem/1301): 提交冒泡排序代码来获得 70 分。
+    * [1302. Optimal Sort](https://acm.sjtu.edu.cn/OnlineJudge/problem/1302): 提交样例代码来获得 10 分。
 
     由于在学期内的迟交仅会导致在计算分数时超时分数减半，按照上述方案，
 
