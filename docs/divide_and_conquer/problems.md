@@ -5,8 +5,6 @@
 
 [^part]: 这里的划分取了不同的划分的可能结果的并集：划分点两侧的部分都允许等于 pivot 的元素存在。因此，后续正确性要求亦是基于这个并集的定义来衡量。
 
-```text
-
 ```cpp
 pair<int, int> partition(vector <int> &a, int pivot) {
     // TODO: implement partition
